@@ -1,0 +1,70 @@
+import Image from "next/image";
+import Link from "next/link";
+import { Eye, Lightbulb, Heart } from "lucide-react";
+import { PageIntro } from "@/components/ui";
+export const metadata = { title: "Sobre a página" };
+export default function Page() {
+  return (
+    <section className="container page-section">
+      <PageIntro
+        eyebrow="MUITO PRAZER, ENTRELINHA"
+        title="Um espaço para olhar de novo."
+        description="Acreditamos que boas histórias estão por toda parte. Nosso propósito é criar um lugar acolhedor para encontrá-las, compartilhá-las e dar espaço a novas ideias."
+      />
+      <div className="about-split">
+        <Image
+          src="/images/shapes.svg"
+          width={1000}
+          height={800}
+          alt="Formas geométricas em verde e terracota"
+        />
+        <div>
+          <span className="eyebrow">O QUE NOS MOVE</span>
+          <h2>A curiosidade é nosso ponto de partida.</h2>
+          <p>
+            A Entrelinha nasce como um portal de conteúdos digitais sobre
+            criatividade, cultura, entretenimento e os pequenos encantos do
+            cotidiano.
+          </p>
+          <p>
+            Aqui, o protagonismo é das ideias. Reunimos publicações, registros
+            visuais e descobertas que convidam à reflexão e a uma pausa
+            agradável no dia.
+          </p>
+          <p>
+            Esta primeira edição apresenta conteúdos e ilustrações
+            demonstrativos. O acervo crescerá com novas histórias e olhares.
+          </p>
+          <Link href="/contato" className="text-link">
+            Faça parte dessa conversa ↗
+          </Link>
+        </div>
+      </div>
+      <div className="values">
+        {[
+          {
+            icon: Eye,
+            title: "Olhar com atenção",
+            text: "Encontrar novas perspectivas nos lugares e momentos mais simples.",
+          },
+          {
+            icon: Lightbulb,
+            title: "Criar possibilidades",
+            text: "Abrir espaço para a imaginação, a experimentação e as boas ideias.",
+          },
+          {
+            icon: Heart,
+            title: "Conectar pessoas",
+            text: "Compartilhar conteúdos com cuidado, respeito e sensibilidade.",
+          },
+        ].map((v) => (
+          <div key={v.title}>
+            <v.icon />
+            <h3>{v.title}</h3>
+            <p>{v.text}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}

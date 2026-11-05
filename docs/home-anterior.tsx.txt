@@ -1,0 +1,158 @@
+import Link from "next/link";
+import Image from "next/image";
+import {
+  ArrowRight,
+  ArrowUpRight,
+  Sparkles,
+  Camera,
+  Shapes,
+  BookOpen,
+} from "lucide-react";
+import { PostCard, SocialLinks } from "@/components/ui";
+import { posts } from "@/lib/content";
+export default function Home() {
+  return (
+    <>
+      <section className="container hero">
+        <div className="hero-copy">
+          <span className="eyebrow">
+            <span className="live-dot" /> UM ESPAÇO PARA NOVAS PERSPECTIVAS
+          </span>
+          <h1>
+            O extraordinário
+            <br />
+            está nas
+            <br />
+            <em>entrelinhas.</em>
+          </h1>
+          <p>
+            Histórias, imagens e ideias para despertar a curiosidade e enxergar
+            o cotidiano com outros olhos.
+          </p>
+          <Link className="button" href="/publicacoes">
+            Explore os conteúdos <ArrowUpRight size={18} />
+          </Link>
+          <div className="hero-note">
+            <span className="small-star">✳</span> Um pouco de inspiração faz
+            toda a diferença.
+          </div>
+        </div>
+        <div className="hero-art">
+          <Image
+            src="/images/landscape.svg"
+            alt="Ilustração de colinas verdes sob um céu de tons suaves"
+            width={1000}
+            height={800}
+            priority
+          />
+          <div className="art-label">
+            <span>OLHARES QUE INSPIRAM</span>
+            <span>01 / 06</span>
+          </div>
+          <Link
+            href="/publicacoes/beleza-nos-pequenos-instantes"
+            className="hero-feature"
+          >
+            <div>
+              <span className="eyebrow">EM DESTAQUE · INSPIRAÇÃO</span>
+              <h2>
+                A beleza mora nos
+                <br />
+                pequenos instantes
+              </h2>
+            </div>
+            <span className="round-arrow">
+              <ArrowUpRight />
+            </span>
+          </Link>
+          <div className="floating-stamp">
+            <Sparkles size={19} /> Novos olhares,
+            <br />
+            novas histórias.
+          </div>
+        </div>
+      </section>
+      <div className="topic-band">
+        <div className="container">
+          <span>UM UNIVERSO DE POSSIBILIDADES</span>
+          <span>
+            <Shapes size={17} /> Criatividade
+          </span>
+          <span>
+            <BookOpen size={17} /> Cultura & histórias
+          </span>
+          <span>
+            <Camera size={17} /> Olhares & registros
+          </span>
+          <span>
+            <Sparkles size={17} /> Inspiração diária
+          </span>
+        </div>
+      </div>
+      <section className="container section">
+        <div className="section-heading">
+          <div>
+            <span className="eyebrow">PARA LER, SENTIR E COMPARTILHAR</span>
+            <h2>
+              Fresquinho por aqui<span className="brand-dot">.</span>
+            </h2>
+          </div>
+          <Link href="/publicacoes" className="text-link">
+            Todas as publicações <ArrowRight size={18} />
+          </Link>
+        </div>
+        <div className="post-grid">
+          {posts.slice(0, 3).map((p) => (
+            <PostCard post={p} key={p.slug} />
+          ))}
+        </div>
+      </section>
+      <section className="container gallery-teaser">
+        <div>
+          <span className="eyebrow">CADA IMAGEM, UMA HISTÓRIA</span>
+          <h2>
+            Um respiro.
+            <br />
+            Um novo <em>olhar.</em>
+          </h2>
+          <p>
+            Uma coleção de cores, lugares e momentos que merecem ser vistos com
+            calma.
+          </p>
+          <Link href="/galeria" className="button light">
+            Conheça a galeria <ArrowUpRight size={18} />
+          </Link>
+        </div>
+        <Link href="/galeria" className="teaser-image">
+          <Image
+            src="/images/architecture.svg"
+            width={1000}
+            height={800}
+            alt="Arquitetura em tons de areia e verde"
+          />
+          <span>Explore nossos álbuns ↗</span>
+        </Link>
+        <Link href="/galeria" className="teaser-image second">
+          <Image
+            src="/images/still-life.svg"
+            width={1000}
+            height={800}
+            alt="Composição ilustrada com uma xícara e folhas"
+          />
+        </Link>
+      </section>
+      <section className="container connection">
+        <span className="eyebrow">A CONVERSA CONTINUA</span>
+        <h2>Boas histórias aproximam pessoas.</h2>
+        <p>
+          Conheça o projeto e descubra um espaço aberto à curiosidade, à
+          criatividade e a novas conexões.
+        </p>
+        <Link href="/sobre" className="text-link">
+          Muito prazer, somos a Entrelinha <ArrowUpRight size={18} />
+        </Link>
+        <SocialLinks />
+      </section>
+    </>
+  );
+}

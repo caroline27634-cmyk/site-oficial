@@ -1,0 +1,248 @@
+/* Run with PLAYWRIGHT_MODULE pointing to playwright-core, and an existing production server. */
+import { createRequire } from "node:module";
+const load = createRequire(import.meta.url);
+const { chromium } = load(process.env.PLAYWRIGHT_MODULE || "playwright-core");
+import assert from "node:assert/strict";
+import path from "node:path";
+const base = process.env.TEST_BASE_URL || "http://127.0.0.1:3001";
+(async () => {
+  const browser = await chromium.launch({
+    executablePath: process.env.CHROMIUM_PATH || "/usr/bin/chromium",
+    headless: true,
+    args: ["--no-sandbox"],
+  });
+  const context = await browser.newContext({
+    viewport: { width: 1440, height: 1000 },
+    reducedMotion: "reduce",
+    permissions: ["clipboard-read", "clipboard-write"],
+  });
+  const page = await context.newPage();
+  const errors = [];
+  page.on("pageerror", (e) => errors.push(e.message));
+  const routes = [
+    "/",
+    "/quem-somos",
+    "/nossos-servicos",
+    "/precos-e-pacotes",
+    "/galeria",
+    "/como-funciona",
+    "/contato",
+    "/privacidade",
+    "/publicacoes",
+    "/publicacoes/beleza-nos-pequenos-instantes",
+  ];
+  for (const route of routes) {
+    const res = await page.goto(base + route);
+    assert.equal(res.status(), 200, route);
+    assert.equal(await page.locator("h1").count(), 1, route);
+  }
+  for (const route of ["/admin", "/admin/marketing"]) {
+    await page.goto(base + route);
+    await page.waitForURL("**/admin/login");
+    assert.match(
+      await page.locator("main").innerText(),
+      /aguardando configuração/,
+    );
+    assert.equal(await page.locator("input[type=password]").count(), 0);
+    assert.equal(
+      await page
+        .locator("main")
+        .getByRole("button", { name: "Salvar Central" })
+        .count(),
+      0,
+    );
+  }
+  await page.goto(base + "/sobre");
+  await page.waitForURL("**/quem-somos");
+  assert.equal((await page.goto(base + "/rota-inexistente")).status(), 404);
+  await page.goto(base + "/nossos-servicos");
+  assert.equal(
+    await page.getByRole("link", { name: "Quero este ensaio" }).count(),
+    6,
+  );
+  await page.getByRole("link", { name: "Quero este ensaio" }).first().click();
+  await page.waitForURL("**/contato?**");
+  assert.equal(
+    await page.locator("[name=service]").inputValue(),
+    "Ensaios infantis",
+  );
+  await page.goto(base + "/precos-e-pacotes");
+  assert.match(await page.locator("main").innerText(), /2,50/);
+  assert.match(await page.locator("main").innerText(), /10,00/);
+  assert.match(await page.locator("main").innerText(), /20,00/);
+  await page.screenshot({
+    path: path.join(process.cwd(), "docs/preview/pacotes-desktop.png"),
+    fullPage: true,
+  });
+  await page
+    .getByRole("link", { name: "Solicitar este pacote" })
+    .nth(1)
+    .click();
+  await page.waitForURL("**/contato?**");
+  assert.match(await page.locator("[name=package]").inputValue(), /5 fotos/);
+  assert.equal(await page.locator("[name=consent]").isDisabled(), true);
+  let orderRequests = 0;
+  page.on("request", (r) => {
+    if (r.url().includes("/api/orcamentos")) orderRequests++;
+  });
+  await page.getByRole("button", { name: "Revisar solicitação" }).click();
+  assert.equal(
+    await page.locator("form.contact-form").evaluate((f) => f.checkValidity()),
+    false,
+  );
+  await page.locator("[name=name]").fill("Cliente de teste");
+  await page
+    .locator("[name=service]")
+    .selectOption({ label: "Ensaios infantis" });
+  await page.locator("[name=theme]").fill("Jardim encantado");
+  await page.getByRole("button", { name: "Revisar solicitação" }).click();
+  await page.waitForURL("**/contato/confirmacao");
+  assert.match(await page.locator("textarea").inputValue(), /Jardim encantado/);
+  assert.match(await page.locator("textarea").inputValue(), /5 fotos/);
+  assert.equal(orderRequests, 0, "No transmission without consent");
+  assert.equal(
+    await page
+      .getByRole("button", { name: "Conversar pelo Messenger", exact: true })
+      .isDisabled(),
+    true,
+  );
+  assert.equal(
+    await page
+      .getByRole("button", { name: "Conversar pelo Instagram", exact: true })
+      .isDisabled(),
+    true,
+  );
+  await page.getByRole("button", { name: "Copiar resumo do pedido" }).click();
+  await page.waitForFunction(() =>
+    document.querySelector("[role=status]")?.textContent.includes("copiado"),
+  );
+  assert.match(await page.locator("[role=status]").innerText(), /copiado/);
+  assert.match(
+    await page.evaluate(() => navigator.clipboard.readText()),
+    /não representa pagamento/,
+  );
+  await page.screenshot({
+    path: path.join(process.cwd(), "docs/preview/confirmacao-desktop.png"),
+    fullPage: true,
+  });
+  await page.reload();
+  assert.match(await page.locator("textarea").inputValue(), /Jardim encantado/);
+  await page
+    .getByRole("button", { name: "Limpar resumo deste navegador" })
+    .click();
+  assert.equal(await page.locator("textarea").count(), 0);
+  await page.goto(base + "/galeria");
+  assert.equal(await page.locator(".photo-card").count(), 9);
+  await page.getByRole("button", { name: "Mesversários", exact: true }).click();
+  assert.equal(await page.locator(".photo-card").count(), 1);
+  await page.locator(".photo-card").click();
+  await page.waitForFunction(() => document.querySelector("dialog").open);
+  await page.keyboard.press("Escape");
+  assert.equal(await page.locator("dialog").evaluate((d) => d.open), false);
+  await page.getByRole("button", { name: "Paisagens", exact: true }).click();
+  assert.equal(await page.locator(".photo-card").count(), 2);
+  await page.locator(".photo-card").first().click();
+  await page.waitForFunction(() => document.querySelector("dialog").open);
+  await page.keyboard.press("ArrowRight");
+  assert.match(await page.locator(".lightbox-toolbar").innerText(), /silêncio/);
+  await page.keyboard.press("Escape");
+  await page.goto(base);
+  for (const image of await page.locator('main img').all()) {
+    await image.scrollIntoViewIfNeeded();
+    await image.evaluate(img => img.decode());
+  }
+  await page.evaluate(() => window.scrollTo(0, 0));
+  await page.waitForFunction(() => Array.from(document.images).every(i => i.complete && i.naturalWidth > 0));
+  await page.screenshot({
+    path: path.join(process.cwd(), "docs/preview/inicio-desktop.png"),
+    fullPage: true,
+  });
+  for (const width of [320, 390, 768, 1024]) {
+    await page.setViewportSize({ width, height: 900 });
+    for (const route of routes.slice(0, 7)) {
+      await page.goto(base + route);
+      assert(
+        await page.evaluate(
+          () => document.documentElement.scrollWidth <= innerWidth,
+        ),
+        route + " overflow at " + width,
+      );
+      assert(
+        await page
+          .locator("body")
+          .innerText()
+          .then((x) => !x.includes("WhatsApp")),
+      );
+    }
+  }
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto(base);
+  await page.getByRole("button", { name: "Abrir menu" }).click();
+  assert.equal(
+    await page
+      .getByRole("button", { name: "Fechar menu" })
+      .getAttribute("aria-expanded"),
+    "true",
+  );
+  await page
+    .locator("#main-nav")
+    .getByRole("link", { name: "Preços e pacotes" })
+    .click();
+  await page.waitForURL("**/precos-e-pacotes");
+  assert.equal(
+    await page
+      .getByRole("button", { name: "Abrir menu" })
+      .getAttribute("aria-expanded"),
+    "false",
+  );
+  assert.equal(
+    await page.locator("#main-nav a[aria-current=page]").textContent(),
+    "Preços e pacotes",
+  );
+  await page.goto(base);
+  for (const image of await page.locator('main img').all()) {
+    await image.scrollIntoViewIfNeeded();
+    await image.evaluate(img => img.decode());
+  }
+  await page.evaluate(() => window.scrollTo(0, 0));
+  await page.waitForFunction(() => Array.from(document.images).every(i => i.complete && i.naturalWidth > 0));
+  await page.screenshot({
+    path: path.join(process.cwd(), "docs/preview/inicio-mobile.png"),
+    fullPage: true,
+  });
+  const api = await context.request.post(base + "/api/orcamentos", {
+    headers: { origin: base },
+    data: {
+      name: "Teste",
+      service: "Infantil",
+      package: "5 fotos",
+      theme: "Jardim",
+      consent: false,
+    },
+  });
+  assert.equal(api.status(), 400);
+  const unavailable = await context.request.post(base + "/api/orcamentos", {
+    headers: { origin: base },
+    data: {
+      name: "Teste",
+      service: "Infantil",
+      package: "5 fotos",
+      theme: "Jardim",
+      consent: true,
+    },
+  });
+  assert.equal(unavailable.status(), 503);
+  const foreign = await context.request.post(base + "/api/orcamentos", {
+    headers: { origin: "https://invalid.example" },
+    data: {},
+  });
+  assert.equal(foreign.status(), 403);
+  assert.deepEqual(errors, []);
+  console.log(
+    "PASS: rotas, proteção admin/marketing, preços e seleção, resumo/copiar/limpar, ausência de envio sem consentimento, galeria preservada, modal, menu, 4 larguras responsivas, API inválida/indisponível/origem. Zero erros JS.",
+  );
+  await browser.close();
+})().catch((e) => {
+  console.error(e);
+  process.exit(1);
+});
