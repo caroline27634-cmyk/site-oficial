@@ -126,3 +126,68 @@ assert(
 console.log(
   "PASS: schemas, consentimento obrigatório na API, preços, preservação do acervo, URLs oficiais, datas e métricas.",
 );
+
+const { galleryCategories, catalogCategory, movePhoto, inquirySummary } = load(
+  "../src/lib/gallery.ts",
+);
+assert.equal(galleryCategories.length, 8);
+assert.deepEqual(defaults.categories, galleryCategories);
+assert(defaults.photos.every((p) => p.description && p.kind === "placeholder"));
+assert(
+  galleryCategories.every((c) => defaults.photos.some((p) => p.album === c)),
+);
+assert.deepEqual(
+  defaults.packages.map((p) => [p.count, p.cents]),
+  [
+    [1, 250],
+    [5, 1000],
+    [10, 2000],
+  ],
+);
+const originalOrder = defaults.photos.map((p) => p.id);
+const reordered = movePhoto(defaults.photos, defaults.photos[0].id, 1);
+assert.equal(reordered[1].id, defaults.photos[0].id);
+assert.deepEqual(
+  defaults.photos.map((p) => p.id),
+  originalOrder,
+  "No mutation while reordering",
+);
+assert.equal(
+  movePhoto(defaults.photos, defaults.photos[0].id, -1),
+  defaults.photos,
+);
+assert.equal(movePhoto(defaults.photos, "missing", 1), defaults.photos);
+assert.equal(
+  movePhoto(defaults.photos, defaults.photos.at(-1).id, 1),
+  defaults.photos,
+);
+assert.equal(catalogCategory("Infantis"), "Ensaios infantis");
+assert.equal(catalogCategory("Paisagens"), "Transformações com IA");
+assert.equal(catalogCategory("Tema personalizado"), "Tema personalizado");
+assert.match(inquirySummary(defaults.photos[0]), /Primeiros sonhos/);
+assert.match(inquirySummary(defaults.photos[0]), /Recém-nascidos/);
+assert.match(inquirySummary(defaults.photos[0]), /não representa pagamento/);
+const legacy = {
+  id: "old",
+  title: "Acervo",
+  album: galleryCategories[0],
+  image: "/images/studio-moon.svg",
+};
+const migrated = contentSchema.parse({ ...defaults, photos: [legacy] });
+assert.equal(migrated.photos[0].description, "");
+assert.equal(migrated.photos[0].kind, "placeholder");
+assert(
+  !contentSchema.safeParse({
+    ...defaults,
+    photos: [{ ...legacy, kind: "real" }],
+  }).success,
+);
+assert(
+  !contentSchema.safeParse({
+    ...defaults,
+    photos: [{ ...legacy, description: "x".repeat(2001) }],
+  }).success,
+);
+console.log(
+  "PASS: oito categorias, compatibilidade do acervo, descrições, classificação IA, resumo, ordenação e preços preservados.",
+);

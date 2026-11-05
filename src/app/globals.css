@@ -2000,3 +2000,171 @@ footer {
   font-size: 10px;
   overflow-wrap: anywhere;
 }
+/* Catálogo de ensaios: preserva a paleta do estúdio e os arquivos originais. */
+.catalog-description {
+  display: block;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.7;
+  margin: 12px 0 8px;
+}
+.catalog-label {
+  display: inline-block;
+  font-size: 9px;
+  letter-spacing: 0.5px;
+  color: var(--accent);
+  line-height: 1.6;
+}
+.photo-card {
+  align-self: start;
+}
+.photo-caption {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+}
+.photo-caption > span {
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: 3px 10px;
+  color: var(--muted);
+  font-size: 10px;
+}
+.photo-card .photo-caption strong {
+  font-size: 23px;
+}
+.catalog-lightbox {
+  width: min(94vw, 980px);
+  max-height: 94dvh;
+  background: var(--paper);
+  color: var(--ink);
+  border-radius: 8px;
+  padding: 35px;
+}
+.catalog-lightbox::backdrop {
+  background: #432e3ccc;
+}
+.catalog-lightbox .lightbox-content > img {
+  max-height: 50vh;
+  object-fit: contain;
+  background: #f5eae5;
+}
+.catalog-lightbox .close-lightbox {
+  top: -25px;
+  right: -25px;
+  border: 1px solid var(--line);
+}
+.catalog-lightbox .lightbox-toolbar {
+  margin-top: 20px;
+}
+.catalog-lightbox .lightbox-toolbar button {
+  color: var(--ink);
+  border-color: var(--line);
+}
+.catalog-lightbox .lightbox-toolbar span {
+  color: var(--muted);
+}
+.catalog-details {
+  margin-top: 25px;
+  border-top: 1px solid var(--line);
+  padding-top: 20px;
+}
+.catalog-details h2 {
+  font-size: 32px;
+  margin: 12px 0;
+}
+.catalog-details > p {
+  font-size: 14px;
+  line-height: 1.8;
+}
+.catalog-actions {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 22px;
+}
+.gallery-inquiry {
+  margin-top: 25px;
+  padding: 25px;
+  background: #f6eae7;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+}
+.gallery-inquiry h3 {
+  font-family: var(--serif);
+  font-size: 27px;
+  scroll-margin: 15px;
+}
+.gallery-inquiry p {
+  font-size: 12px;
+  margin: 15px 0;
+}
+.gallery-inquiry label {
+  display: block;
+  font-size: 12px;
+}
+.gallery-inquiry textarea {
+  display: block;
+  width: 100%;
+  border: 1px solid #d7c0b7;
+  border-radius: 4px;
+  background: var(--paper);
+  padding: 14px;
+  font: 12px/1.8 var(--sans);
+  color: var(--ink);
+  margin: 10px 0 18px;
+  resize: vertical;
+}
+.gallery-inquiry small {
+  font-size: 11px;
+  color: var(--muted);
+}
+.gallery-order > span {
+  font-size: 12px;
+  color: var(--muted);
+}
+@media (max-width: 760px) {
+  .catalog-lightbox {
+    padding: 25px 18px;
+    max-height: 94dvh;
+  }
+  .catalog-lightbox .close-lightbox {
+    top: -18px;
+    right: -12px;
+  }
+  .catalog-lightbox .lightbox-content > img {
+    max-height: 40vh;
+  }
+  .catalog-details h2 {
+    font-size: 27px;
+  }
+  .gallery-inquiry {
+    padding: 18px;
+  }
+  .photo-card .photo-caption strong {
+    font-size: 19px;
+  }
+  .catalog-description {
+    font-size: 11px;
+  }
+  .catalog-actions {
+    gap: 15px;
+  }
+  .catalog-actions > .button {
+    width: 100%;
+  }
+  .gallery-inquiry .button {
+    width: 100%;
+  }
+  .gallery-inquiry .confirmation-channels {
+    gap: 12px;
+  }
+  .gallery-order {
+    align-items: stretch;
+    flex-direction: column;
+  }
+}
+body:has(.catalog-lightbox[open]) {
+  overflow: hidden;
+}

@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { saveStudio, uploadPortfolio, deleteQuote } from "@/app/admin/actions";
 import type { StudioContent } from "@/lib/studio";
+import { galleryCategories, catalogCategory, movePhoto } from "@/lib/gallery";
 export type Quote = {
   id: string;
   name: string;
@@ -19,7 +20,19 @@ export function StudioEditor({
   initialRevision: number;
   quotes: Quote[];
 }) {
-  const [data, setData] = useState(initial);
+  const [data, setData] = useState(() => ({
+    ...initial,
+    categories: [
+      ...new Set([
+        ...galleryCategories,
+        ...initial.categories.map(catalogCategory),
+      ]),
+    ],
+    photos: initial.photos.map((p) => ({
+      ...p,
+      album: catalogCategory(p.album),
+    })),
+  }));
   const [revision, setRevision] = useState(initialRevision);
   const [tab, setTab] = useState("Textos e redes");
   const [status, setStatus] = useState("");
@@ -211,8 +224,12 @@ export function StudioEditor({
           </p>
           <h2>Fotografias do portfólio</h2>
           <p>
-            Apenas imagens demonstrativas ou com autorização específica de
-            divulgação. Não envie fotos privadas para o bucket público.
+            Use fotografias individuais de personagens fictícios criados com IA
+            ou ilustrações temporárias. Não recorte montagens para apresentá-las
+            como fotografias originais e não envie fotos pessoais para o bucket
+            público. Os arquivos originais são preservados; o upload aceita
+            JPEG, PNG ou WebP até 5 MB. A ordem abaixo é a ordem do catálogo,
+            depois de salvar.
           </p>
           <button
             className="button"
@@ -222,7 +239,9 @@ export function StudioEditor({
                 ...data.photos,
                 {
                   id: crypto.randomUUID(),
-                  title: "Nova imagem",
+                  title: "Novo exemplo de ensaio",
+                  description: "Descreva o tema e a inspiração deste ensaio.",
+                  kind: "placeholder",
                   album: data.categories[0],
                   image: "/images/studio-balloons.svg",
                 },
@@ -235,7 +254,7 @@ export function StudioEditor({
             <fieldset key={p.id}>
               <legend>{p.title}</legend>
               <label>
-                Título e descrição acessível
+                Nome do ensaio
                 <input
                   value={p.title}
                   onChange={(e) =>
@@ -249,7 +268,80 @@ export function StudioEditor({
                 />
               </label>
               <label>
-                Tema
+                Descrição do ensaio
+                <textarea
+                  maxLength={2000}
+                  value={p.description || ""}
+                  rows={3}
+                  onChange={(e) =>
+                    set(
+                      "photos",
+                      data.photos.map((x) =>
+                        x.id === p.id
+                          ? { ...x, description: e.target.value }
+                          : x,
+                      ),
+                    )
+                  }
+                />
+              </label>
+              <label>
+                Identificação da imagem
+                <select
+                  value={p.kind || "placeholder"}
+                  onChange={(e) =>
+                    set(
+                      "photos",
+                      data.photos.map((x) =>
+                        x.id === p.id
+                          ? {
+                              ...x,
+                              kind: e.target.value as "placeholder" | "ai",
+                            }
+                          : x,
+                      ),
+                    )
+                  }
+                >
+                  <option value="placeholder">Ilustração temporária</option>
+                  <option value="ai">
+                    Imagem demonstrativa com IA — personagem fictício
+                  </option>
+                </select>
+              </label>
+              <div className="admin-inline gallery-order">
+                <span>
+                  Posição {i + 1} de {data.photos.length}
+                </span>
+                <button
+                  className="button outline"
+                  aria-label={"Mover para cima: " + p.title}
+                  disabled={i === 0 || busy}
+                  onClick={() =>
+                    setData((d) => ({
+                      ...d,
+                      photos: movePhoto(d.photos, p.id, -1),
+                    }))
+                  }
+                >
+                  ↑ Mover para cima
+                </button>
+                <button
+                  className="button outline"
+                  aria-label={"Mover para baixo: " + p.title}
+                  disabled={i === data.photos.length - 1 || busy}
+                  onClick={() =>
+                    setData((d) => ({
+                      ...d,
+                      photos: movePhoto(d.photos, p.id, 1),
+                    }))
+                  }
+                >
+                  ↓ Mover para baixo
+                </button>
+              </div>
+              <label>
+                Categoria
                 <select
                   value={p.album}
                   onChange={(e) =>

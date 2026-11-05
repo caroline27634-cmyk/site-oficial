@@ -132,27 +132,107 @@ const base = process.env.TEST_BASE_URL || "http://127.0.0.1:3001";
     .click();
   assert.equal(await page.locator("textarea").count(), 0);
   await page.goto(base + "/galeria");
-  assert.equal(await page.locator(".photo-card").count(), 9);
-  await page.getByRole("button", { name: "Mesversários", exact: true }).click();
-  assert.equal(await page.locator(".photo-card").count(), 1);
-  await page.locator(".photo-card").click();
+  assert.equal(await page.locator(".photo-card").count(), 14);
+  const galleryThemes = [
+    "Recém-nascidos",
+    "Ensaios infantis",
+    "Mesversários",
+    "Aniversários",
+    "Datas comemorativas",
+    "Gestantes e família",
+    "Convites personalizados",
+    "Transformações com IA",
+  ];
+  for (const theme of galleryThemes) {
+    await page.getByRole("button", { name: theme, exact: true }).click();
+    assert((await page.locator(".photo-card").count()) > 0, theme);
+  }
+  await page.getByRole("button", { name: "Todos", exact: true }).click();
+  assert.match(
+    await page.locator("main").innerText(),
+    /Imagens demonstrativas criadas com inteligência artificial/,
+  );
+  await page.screenshot({
+    path: path.join(process.cwd(), "docs/preview/galeria-desktop.png"),
+    fullPage: true,
+  });
+  const trigger = page.locator(".photo-card").first();
+  await trigger.click();
   await page.waitForFunction(() => document.querySelector("dialog").open);
+  assert.match(
+    await page.locator(".catalog-details").innerText(),
+    /Primeiros sonhos/,
+  );
+  assert.match(
+    await page.locator(".catalog-details").innerText(),
+    /sem bebê real/,
+  );
+  await page
+    .getByRole("button", { name: "Quero um ensaio assim", exact: true })
+    .click();
+  assert.match(
+    await page.getByRole("textbox", { name: "Resumo do ensaio" }).inputValue(),
+    /Primeiros sonhos/,
+  );
+  assert.match(
+    await page.getByRole("textbox", { name: "Resumo do ensaio" }).inputValue(),
+    /Recém-nascidos/,
+  );
+  assert(
+    await page
+      .getByRole("button", { name: "Conversar pelo Instagram", exact: true })
+      .isDisabled(),
+  );
+  assert(
+    await page
+      .getByRole("button", { name: "Conversar pelo Messenger", exact: true })
+      .isDisabled(),
+  );
+  await page
+    .getByRole("button", { name: "Copiar referência do ensaio" })
+    .click();
+  await page.waitForFunction(() =>
+    document
+      .querySelector(".gallery-inquiry [role=status]")
+      ?.textContent.includes("copiado"),
+  );
+  assert.match(
+    await page.evaluate(() => navigator.clipboard.readText()),
+    /Primeiros sonhos/,
+  );
+  assert.equal(orderRequests, 0, "Gallery inquiry must not transmit data");
+  await page
+    .locator(".gallery-inquiry")
+    .screenshot({
+      path: path.join(process.cwd(), "docs/preview/galeria-solicitacao.png"),
+    });
   await page.keyboard.press("Escape");
   assert.equal(await page.locator("dialog").evaluate((d) => d.open), false);
-  await page.getByRole("button", { name: "Paisagens", exact: true }).click();
-  assert.equal(await page.locator(".photo-card").count(), 2);
-  await page.locator(".photo-card").first().click();
+  assert(
+    await trigger.evaluate((e) => e === document.activeElement),
+    "Focus returns to selected card",
+  );
+  await page
+    .getByRole("button", { name: "Transformações com IA", exact: true })
+    .click();
+  assert.equal(await page.locator(".photo-card").count(), 7);
+  await page.locator(".photo-card").nth(1).click();
   await page.waitForFunction(() => document.querySelector("dialog").open);
   await page.keyboard.press("ArrowRight");
-  assert.match(await page.locator(".lightbox-toolbar").innerText(), /silêncio/);
+  assert.match(
+    await page.locator(".lightbox-toolbar").innerText(),
+    /Entre formas e cores/,
+  );
   await page.keyboard.press("Escape");
   await page.goto(base);
-  for (const image of await page.locator('main img').all()) {
+  for (const image of await page.locator("main img").all()) {
     await image.scrollIntoViewIfNeeded();
-    await image.evaluate(img => img.decode());
+    await image.evaluate((img) => img.decode());
   }
   await page.evaluate(() => window.scrollTo(0, 0));
-  await page.waitForFunction(() => Array.from(document.images).every(i => i.complete && i.naturalWidth > 0));
+  await page.waitForFunction(() =>
+    Array.from(document.images).every((i) => i.complete && i.naturalWidth > 0),
+  );
   await page.screenshot({
     path: path.join(process.cwd(), "docs/preview/inicio-desktop.png"),
     fullPage: true,
@@ -200,16 +280,41 @@ const base = process.env.TEST_BASE_URL || "http://127.0.0.1:3001";
     "Preços e pacotes",
   );
   await page.goto(base);
-  for (const image of await page.locator('main img').all()) {
+  for (const image of await page.locator("main img").all()) {
     await image.scrollIntoViewIfNeeded();
-    await image.evaluate(img => img.decode());
+    await image.evaluate((img) => img.decode());
   }
   await page.evaluate(() => window.scrollTo(0, 0));
-  await page.waitForFunction(() => Array.from(document.images).every(i => i.complete && i.naturalWidth > 0));
+  await page.waitForFunction(() =>
+    Array.from(document.images).every((i) => i.complete && i.naturalWidth > 0),
+  );
   await page.screenshot({
     path: path.join(process.cwd(), "docs/preview/inicio-mobile.png"),
     fullPage: true,
   });
+  await page.goto(base + "/galeria");
+  for (const image of await page.locator("main img").all()) {
+    await image.scrollIntoViewIfNeeded();
+    await image.evaluate((img) => img.decode());
+  }
+  await page.evaluate(() => scrollTo(0, 0));
+  await page.screenshot({
+    path: path.join(process.cwd(), "docs/preview/galeria-mobile.png"),
+    fullPage: true,
+  });
+  await page.locator(".photo-card").first().click();
+  await page
+    .getByRole("button", { name: "Quero um ensaio assim", exact: true })
+    .click();
+  assert(
+    await page.evaluate(
+      () =>
+        document.querySelector("dialog").scrollWidth <=
+        document.querySelector("dialog").clientWidth,
+    ),
+    "Mobile dialog width",
+  );
+  await page.keyboard.press("Escape");
   const api = await context.request.post(base + "/api/orcamentos", {
     headers: { origin: base },
     data: {

@@ -1,5 +1,13 @@
 import { photos } from "./content";
-export type Photo = { id: string; title: string; album: string; image: string };
+import { galleryCategories } from "./gallery";
+export type Photo = {
+  id: string;
+  title: string;
+  album: string;
+  image: string;
+  description?: string;
+  kind?: "placeholder" | "ai";
+};
 export type Service = {
   id: string;
   title: string;
@@ -40,35 +48,87 @@ export const defaults: StudioContent = {
   instagram: "",
   messenger: "",
   instagramDirect: "",
-  categories: [
-    "Infantis",
-    "Mesversários",
-    "Aniversários",
-    "Datas comemorativas",
-    "Convites",
-    "Transformações",
-    ...new Set(photos.map((p) => p.album)),
-  ],
+  categories: [...galleryCategories],
   photos: [
+    {
+      id: "newborn-demo",
+      title: "Primeiros sonhos",
+      album: "Recém-nascidos",
+      image: "/images/studio-moon.svg",
+      description:
+        "Inspiração em uma atmosfera suave e acolhedora para um ensaio virtual de recém-nascido. Ilustração temporária, sem bebê real.",
+      kind: "placeholder",
+    },
     {
       id: "demo-1",
       title: "Um céu de possibilidades",
-      album: "Infantis",
+      album: "Ensaios infantis",
       image: "/images/studio-balloons.svg",
+      description:
+        "Balões em tons delicados inspiram um cenário lúdico para um ensaio infantil personalizado. Ilustração temporária, sem personagem real.",
+      kind: "placeholder",
     },
     {
       id: "demo-2",
       title: "Pequenas grandes celebrações",
       album: "Mesversários",
       image: "/images/studio-cake.svg",
+      description:
+        "Um cenário doce para celebrar os primeiros meses, com cores e detalhes a combinar. Ilustração temporária.",
+      kind: "placeholder",
+    },
+    {
+      id: "birthday-demo",
+      title: "Uma festa de imaginação",
+      album: "Aniversários",
+      image: "/images/studio-gift.svg",
+      description:
+        "Presentes e cores suaves como inspiração para um aniversário temático. O tema e a composição serão definidos na conversa.",
+      kind: "placeholder",
+    },
+    {
+      id: "season-demo",
+      title: "Datas para encantar",
+      album: "Datas comemorativas",
+      image: "/images/studio-flowers.svg",
+      description:
+        "Detalhes florais como referência para celebrar datas especiais. Ilustração temporária que será substituída por um arquivo exclusivo.",
+      kind: "placeholder",
+    },
+    {
+      id: "family-demo",
+      title: "Laços e novos começos",
+      album: "Gestantes e família",
+      image: "/images/studio-balloons.svg",
+      description:
+        "Paleta delicada para inspirar composições de gestantes e família. Ilustração temporária, sem pessoas ou fotografias particulares.",
+      kind: "placeholder",
     },
     {
       id: "demo-3",
       title: "Um convite ao encanto",
-      album: "Convites",
+      album: "Convites personalizados",
       image: "/images/studio-invitation.svg",
+      description:
+        "Um convite digital com atmosfera elegante para apresentar uma celebração. Textos e detalhes serão personalizados.",
+      kind: "placeholder",
     },
-    ...photos.map((p) => ({ ...p, id: String(p.id) })),
+    {
+      id: "transform-demo",
+      title: "Entre sonhos e estrelas",
+      album: "Transformações com IA",
+      image: "/images/studio-moon.svg",
+      description:
+        "Uma atmosfera de lua e estrelas como referência para uma transformação digital com IA. Ilustração temporária, não uma fotografia final.",
+      kind: "placeholder",
+    },
+    ...photos.map((p) => ({
+      ...p,
+      id: String(p.id),
+      album: "Transformações com IA",
+      description: `Acervo preservado: ${p.title}. Ilustração temporária para inspirar cores, cenários e transformações digitais; não representa uma fotografia de cliente.`,
+      kind: "placeholder" as const,
+    })),
   ],
   services: [
     {

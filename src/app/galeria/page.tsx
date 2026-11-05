@@ -1,5 +1,6 @@
 import { PageIntro } from "@/components/ui";
 import { Gallery } from "@/components/content-browser";
+import { galleryCategories, catalogCategory } from "@/lib/gallery";
 import { loadStudio } from "@/lib/studio-server";
 export const dynamic = "force-dynamic";
 export const metadata = { title: "Galeria de fotos" };
@@ -10,9 +11,17 @@ export default async function Page() {
       <PageIntro
         eyebrow="NOSSO UNIVERSO CRIATIVO"
         title="Um retrato de possibilidades."
-        description="Explore os temas e amplie cada imagem para descobrir os detalhes. Nosso portfólio inicial usa ilustrações demonstrativas; o acervo anterior permanece disponível."
+        description="Escolha um tema, descubra as possibilidades e encontre a inspiração para o seu ensaio virtual com inteligência artificial. As imagens desta prévia são ilustrações temporárias, que serão substituídas por fotografias exclusivas de personagens fictícios."
       />
-      <Gallery photos={c.photos} themes={c.categories} />
+      <Gallery
+        photos={c.photos.map((p) => ({
+          ...p,
+          album: catalogCategory(p.album),
+        }))}
+        themes={[...galleryCategories, ...c.categories.map(catalogCategory)]}
+        messenger={c.messenger}
+        instagram={c.instagramDirect}
+      />
     </section>
   );
 }

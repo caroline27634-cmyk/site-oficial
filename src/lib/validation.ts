@@ -48,6 +48,8 @@ export const contentSchema = z
           title: text,
           album: text,
           image: imagePath,
+          description: z.string().trim().max(2000).default(""),
+          kind: z.enum(["placeholder", "ai"]).default("placeholder"),
         }),
       )
       .max(500),
