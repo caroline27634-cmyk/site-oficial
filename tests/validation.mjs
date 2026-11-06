@@ -209,7 +209,7 @@ assert.deepEqual(
   newbornCollection.map((p) => p.sample),
   [false, true, true],
 );
-assert.equal(defaults.photos.length, 21);
+assert.equal(defaults.photos.length, 25);
 assert.equal(
   defaults.photos.filter((p) => p.album === "Recém-nascidos").length,
   4,
@@ -281,4 +281,54 @@ for (const photo of childrenCollection) {
 }
 console.log(
   "PASS: coleção infantil, categoria existente, títulos/descrições originais, quatro avisos de recorte e prompts separados.",
+);
+
+const { monthlyCollection } = load("../src/lib/monthly-collection.ts");
+const monthlyNotes = JSON.parse(
+  fs.readFileSync(
+    new URL("../docs/colecoes/mesversarios.prompts.json", import.meta.url),
+    "utf8",
+  ),
+);
+assert.equal(monthlyCollection.length, 4);
+assert.equal(
+  defaults.photos.filter((p) => p.album === "Mesversários").length,
+  5,
+);
+assert.deepEqual(
+  monthlyCollection.map((p) => p.title),
+  [
+    "Ursinho dos Sonhos",
+    "Pequena Princesa",
+    "Safari Encantado",
+    "Abelhinha do Amor",
+  ],
+);
+for (const photo of monthlyCollection) {
+  assert.equal(photo.kind, "ai");
+  assert.equal(photo.sample, true);
+  assert.equal(photo.album, "Mesversários");
+  assert.match(photo.customization, /mês solicitado/);
+  assert.match(inquirySummary(photo), /Informe o mês desejado/);
+  const item = monthlyNotes.items.find((item) =>
+    photo.image.endsWith(item.file),
+  );
+  assert.equal(photo.description, item.description);
+  assert(item.promptOriginal.length > 100);
+  assert.equal(item.personalization.monthsVariable, "{{meses}}");
+  assert(!("promptOriginal" in photo));
+  const bytes = fs.readFileSync(
+    new URL("../public" + photo.image, import.meta.url),
+  );
+  assert.equal(createHash("sha256").update(bytes).digest("hex"), item.sha256);
+}
+assert.equal(migrated.photos[0].customization, "");
+assert(
+  !contentSchema.safeParse({
+    ...defaults,
+    photos: [{ ...legacy, customization: "x".repeat(501) }],
+  }).success,
+);
+console.log(
+  "PASS: coleção Mesversários, imagens preservadas, meses personalizáveis no resumo e prompts separados.",
 );

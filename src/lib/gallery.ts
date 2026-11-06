@@ -30,4 +30,4 @@ export function movePhoto(photos: Photo[], id: string, direction: -1 | 1) {
   return result;
 }
 export const inquirySummary = (photo: Photo) =>
-  `Olá! Gostaria de um ensaio assim no Encanto no Retrato Studio IA.\nEnsaio: ${photo.title}\nTema/categoria: ${photo.album}\nReferência: ${photo.id}\n${photo.description ? "Inspiração: " + photo.description + "\n" : ""}\nGostaria de confirmar as possibilidades, o prazo e as condições. Esta solicitação não representa pagamento ou contratação confirmada.`;
+  `Olá! Gostaria de um ensaio assim no Encanto no Retrato Studio IA.\nEnsaio: ${photo.title}\nTema/categoria: ${photo.album}\nReferência: ${photo.id}\n${photo.description ? "Inspiração: " + photo.description + "\n" : ""}${photo.customization ? "Personalização: " + photo.customization + "\n" : ""}\nGostaria de confirmar as possibilidades, o prazo e as condições. Esta solicitação não representa pagamento ou contratação confirmada.`;

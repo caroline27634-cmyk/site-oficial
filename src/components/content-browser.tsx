@@ -192,6 +192,9 @@ export function Gallery({
                 </p>
               )}
               <h2>{photo.title}</h2>
+              {photo.customization && (
+                <p className="demo-note">{photo.customization}</p>
+              )}
               <p>
                 {photo.description ||
                   "Uma referência para personalizar seu ensaio virtual. Conte como você imagina o seu tema."}

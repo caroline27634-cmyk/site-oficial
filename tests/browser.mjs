@@ -132,7 +132,7 @@ const base = process.env.TEST_BASE_URL || "http://127.0.0.1:3001";
     .click();
   assert.equal(await page.locator("textarea").count(), 0);
   await page.goto(base + "/galeria");
-  assert.equal(await page.locator(".photo-card").count(), 21);
+  assert.equal(await page.locator(".photo-card").count(), 25);
   const galleryThemes = [
     "Recém-nascidos",
     "Ensaios infantis",
@@ -258,6 +258,68 @@ const base = process.env.TEST_BASE_URL || "http://127.0.0.1:3001";
   await page.evaluate(() => scrollTo(0, 0));
   await page.screenshot({
     path: path.join(process.cwd(), "docs/preview/ensaios-infantis-desktop.png"),
+    fullPage: true,
+  });
+  await page.getByRole("button", { name: "Todos", exact: true }).click();
+  await page.getByRole("button", { name: "Mesversários", exact: true }).click();
+  assert.equal(await page.locator(".photo-card").count(), 5);
+  assert.equal(
+    await page
+      .locator(".photo-card")
+      .filter({ hasText: "Amostra recortada" })
+      .count(),
+    4,
+  );
+  for (const title of [
+    "Ursinho dos Sonhos",
+    "Pequena Princesa",
+    "Safari Encantado",
+    "Abelhinha do Amor",
+  ]) {
+    await page
+      .getByRole("button", { name: "Ampliar " + title, exact: true })
+      .click();
+    await page.waitForFunction(() => document.querySelector("dialog").open);
+    const image = page.locator(".lightbox-content > img");
+    await image.evaluate((i) => i.decode());
+    assert.deepEqual(
+      await image.evaluate((i) => [i.naturalWidth, i.naturalHeight]),
+      [768, 512],
+    );
+    assert.match(
+      await page.locator(".catalog-details").innerText(),
+      /substituir antes de publicar/,
+    );
+    assert.match(
+      await page.locator(".catalog-details").innerText(),
+      /número de meses na imagem é apenas um exemplo/,
+    );
+    await page
+      .getByRole("button", { name: "Quero um ensaio assim", exact: true })
+      .click();
+    const summary = await page
+      .getByRole("textbox", { name: "Resumo do ensaio" })
+      .inputValue();
+    assert(
+      summary.includes(title) &&
+        summary.includes("Mesversários") &&
+        summary.includes("Informe o mês desejado"),
+    );
+    assert(
+      !(await page
+        .locator("main")
+        .innerText()
+        .then((t) => t.includes("Prompt-base"))),
+    );
+    await page.keyboard.press("Escape");
+  }
+  for (const image of await page.locator("main img").all()) {
+    await image.scrollIntoViewIfNeeded();
+    await image.evaluate((i) => i.decode());
+  }
+  await page.evaluate(() => scrollTo(0, 0));
+  await page.screenshot({
+    path: path.join(process.cwd(), "docs/preview/mesversarios-desktop.png"),
     fullPage: true,
   });
   await page.getByRole("button", { name: "Todos", exact: true }).click();

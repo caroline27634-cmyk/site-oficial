@@ -1,6 +1,7 @@
 import { photos } from "./content";
 import { newbornCollection } from "./newborn-collection";
 import { childrenCollection } from "./children-collection";
+import { monthlyCollection } from "./monthly-collection";
 import { galleryCategories } from "./gallery";
 export type Photo = {
   id: string;
@@ -10,6 +11,7 @@ export type Photo = {
   description?: string;
   kind?: "placeholder" | "ai";
   sample?: boolean;
+  customization?: string;
 };
 export type Service = {
   id: string;
@@ -55,6 +57,7 @@ export const defaults: StudioContent = {
   photos: [
     ...newbornCollection,
     ...childrenCollection,
+    ...monthlyCollection,
     {
       id: "newborn-demo",
       title: "Primeiros sonhos",

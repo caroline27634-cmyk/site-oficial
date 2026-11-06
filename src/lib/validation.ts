@@ -51,6 +51,7 @@ export const contentSchema = z
           description: z.string().trim().max(2000).default(""),
           kind: z.enum(["placeholder", "ai"]).default("placeholder"),
           sample: z.boolean().default(false),
+          customization: z.string().trim().max(500).default(""),
         }),
       )
       .max(500),
