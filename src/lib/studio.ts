@@ -1,5 +1,6 @@
 import { photos } from "./content";
 import { newbornCollection } from "./newborn-collection";
+import { childrenCollection } from "./children-collection";
 import { galleryCategories } from "./gallery";
 export type Photo = {
   id: string;
@@ -53,6 +54,7 @@ export const defaults: StudioContent = {
   categories: [...galleryCategories],
   photos: [
     ...newbornCollection,
+    ...childrenCollection,
     {
       id: "newborn-demo",
       title: "Primeiros sonhos",

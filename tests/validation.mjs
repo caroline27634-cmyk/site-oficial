@@ -209,7 +209,7 @@ assert.deepEqual(
   newbornCollection.map((p) => p.sample),
   [false, true, true],
 );
-assert.equal(defaults.photos.length, 17);
+assert.equal(defaults.photos.length, 21);
 assert.equal(
   defaults.photos.filter((p) => p.album === "Recém-nascidos").length,
   4,
@@ -243,4 +243,42 @@ assert(
 );
 console.log(
   "PASS: coleção RN, textos fornecidos, arquivos originais, prompts separados e identificação das duas amostras.",
+);
+
+const { childrenCollection } = load("../src/lib/children-collection.ts");
+const childrenNotes = JSON.parse(
+  fs.readFileSync(
+    new URL("../docs/colecoes/ensaios-infantis.prompts.json", import.meta.url),
+    "utf8",
+  ),
+);
+assert.equal(childrenCollection.length, 4);
+assert.equal(
+  defaults.photos.filter((p) => p.album === "Ensaios infantis").length,
+  5,
+);
+assert.deepEqual(
+  childrenCollection.map((p) => p.title),
+  ["Doce Encanto", "Jardim das Fadas", "Pequeno Aviador", "Reino dos Sonhos"],
+);
+assert(childrenNotes.commonPromptOriginal.includes("consentimento"));
+for (const photo of childrenCollection) {
+  assert.equal(photo.album, "Ensaios infantis");
+  assert.equal(photo.kind, "ai");
+  assert.equal(photo.sample, true);
+  assert(!("promptOriginal" in photo));
+  const item = childrenNotes.items.find((item) =>
+    photo.image.endsWith(item.file),
+  );
+  assert(item && item.promptOriginal.length > 100);
+  assert.equal(photo.title, item.title);
+  assert.equal(photo.description, item.description);
+  assert.equal(item.quality.requiresHighResolutionReplacement, true);
+  const bytes = fs.readFileSync(
+    new URL("../public" + photo.image, import.meta.url),
+  );
+  assert.equal(createHash("sha256").update(bytes).digest("hex"), item.sha256);
+}
+console.log(
+  "PASS: coleção infantil, categoria existente, títulos/descrições originais, quatro avisos de recorte e prompts separados.",
 );
