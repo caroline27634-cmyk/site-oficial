@@ -209,7 +209,7 @@ assert.deepEqual(
   newbornCollection.map((p) => p.sample),
   [false, true, true],
 );
-assert.equal(defaults.photos.length, 25);
+assert.equal(defaults.photos.length, 29);
 assert.equal(
   defaults.photos.filter((p) => p.album === "Recém-nascidos").length,
   4,
@@ -331,4 +331,45 @@ assert(
 );
 console.log(
   "PASS: coleção Mesversários, imagens preservadas, meses personalizáveis no resumo e prompts separados.",
+);
+
+const { birthdayCollection } = load("../src/lib/birthday-collection.ts");
+const birthdayNotes = JSON.parse(
+  fs.readFileSync(
+    new URL("../docs/colecoes/aniversarios.prompts.json", import.meta.url),
+    "utf8",
+  ),
+);
+assert.equal(birthdayCollection.length, 4);
+assert.equal(
+  defaults.photos.filter((p) => p.album === "Aniversários").length,
+  5,
+);
+assert.deepEqual(
+  birthdayCollection.map((p) => p.title),
+  [
+    "Princesa do Castelo",
+    "Pequeno Cowboy",
+    "Aventura Jurássica",
+    "Encantos do Fundo do Mar",
+  ],
+);
+assert(birthdayNotes.commonGuidanceOriginal.includes("foto autorizada"));
+for (const photo of birthdayCollection) {
+  assert.equal(photo.kind, "ai");
+  assert.equal(photo.sample, true);
+  assert.equal(photo.album, "Aniversários");
+  assert(!("promptOriginal" in photo));
+  const record = birthdayNotes.items.find((r) => photo.image.endsWith(r.file));
+  assert(record.promptOriginal.length > 100);
+  assert.equal(photo.title, record.title);
+  assert.equal(photo.description, record.description);
+  assert.equal(record.quality.requiresHighResolutionReplacement, true);
+  const bytes = fs.readFileSync(
+    new URL("../public" + photo.image, import.meta.url),
+  );
+  assert.equal(createHash("sha256").update(bytes).digest("hex"), record.sha256);
+}
+console.log(
+  "PASS: coleção Aniversários, textos fornecidos, arquivos originais, amostras identificadas e prompts separados.",
 );

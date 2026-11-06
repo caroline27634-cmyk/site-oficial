@@ -2,7 +2,7 @@
 
 ## O que mudou
 
-A rota `/galeria` apresenta as oito categorias solicitadas e 25 referências de ensaio (14 ilustrações anteriores, três fotografias demonstrativas de Recém-nascidos, quatro amostras de Ensaios infantis e quatro de Mesversários). As nove imagens do catálogo anterior continuam presentes, com seus identificadores, títulos e arquivos preservados. Os seis exemplos editoriais anteriores estão agrupados em Transformações com IA como referências de atmosfera e cenários; não são apresentados como retratos finais.
+A rota `/galeria` apresenta as oito categorias solicitadas e 29 referências de ensaio (14 ilustrações anteriores, três fotografias demonstrativas de Recém-nascidos, quatro amostras de Ensaios infantis, quatro de Mesversários e quatro de Aniversários). As nove imagens do catálogo anterior continuam presentes, com seus identificadores, títulos e arquivos preservados. Os seis exemplos editoriais anteriores estão agrupados em Transformações com IA como referências de atmosfera e cenários; não são apresentados como retratos finais.
 
 Cada cartão abre uma imagem ampliada, título, categoria e descrição. O original abre em outra aba sem recortar ou reduzir o arquivo. O acervo anterior usa ilustrações temporárias feitas com auxílio de IA. A coleção Recém-nascidos acrescenta três fotografias demonstrativas de personagens fictícios; duas são amostras recortadas explicitamente identificadas e pendentes de substituição antes da publicação. Veja `docs/colecoes/RECEM_NASCIDOS.md` para a avaliação e os prompts organizados.
 

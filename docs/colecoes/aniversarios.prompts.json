@@ -1,0 +1,68 @@
+{
+  "collection": "Aniversários temáticos",
+  "source": "colecao_aniversarios_tematicos_codex.zip",
+  "usage": "Documentação de reprodução futura. Prompts não executados nem importados pela galeria. As imagens recebidas são demonstrações de IA e recortes de uma montagem.",
+  "commonGuidanceOriginal": "Ao personalizar, utilizar somente foto autorizada, tentar preservar características da pessoa, ajustar idade e figurino, sem prometer reprodução idêntica.",
+  "items": [
+    {
+      "file": "ANI_01_Princesa_do_Castelo.jpg",
+      "title": "Princesa do Castelo",
+      "category": "Aniversários",
+      "description": "Uma celebração de conto de fadas com vestido dourado, rosas e cenário de castelo.",
+      "promptOriginal": "Fotografia editorial realista de aniversário infantil, criança usando vestido dourado elegante e tiara, rosas vermelhas, cenário de castelo de conto de fadas, iluminação cinematográfica quente, composição profissional, sem texto ou logotipo.",
+      "quality": {
+        "width": 768,
+        "height": 512,
+        "croppedSample": true,
+        "requiresHighResolutionReplacement": true,
+        "approval": "Somente prévia; aprovar versões individuais em alta resolução antes da publicação definitiva"
+      },
+      "sha256": "8b768ebf9a518691f1ba26f4c4427a9030473117ce50aeff85f62767d329fc5d"
+    },
+    {
+      "file": "ANI_02_Pequeno_Cowboy.jpg",
+      "title": "Pequeno Cowboy",
+      "category": "Aniversários",
+      "description": "Uma aventura de aniversário no velho oeste, com chapéu, feno e decoração rústica.",
+      "promptOriginal": "Fotografia editorial realista de aniversário infantil, criança com chapéu de cowboy marrom, lenço vermelho, colete e cenário de fazenda vintage com feno, cavalo de pelúcia, luz quente, sem texto ou logotipo.",
+      "quality": {
+        "width": 768,
+        "height": 512,
+        "croppedSample": true,
+        "requiresHighResolutionReplacement": true,
+        "approval": "Somente prévia; aprovar versões individuais em alta resolução antes da publicação definitiva"
+      },
+      "sha256": "f2433b43723643adca846c73a6ee3a9989acb75b4dd27c9355db525db7a2c1ea"
+    },
+    {
+      "file": "ANI_03_Aventura_Jurassica.jpg",
+      "title": "Aventura Jurássica",
+      "category": "Aniversários",
+      "description": "Um aniversário de explorador entre folhagens e dinossauros de fantasia.",
+      "promptOriginal": "Fotografia editorial realista de aniversário infantil, criança exploradora com roupa cáqui e chapéu safari, floresta pré-histórica cenográfica, dinossauros de brinquedo, folhagens tropicais, iluminação profissional, sem texto ou logotipo.",
+      "quality": {
+        "width": 768,
+        "height": 512,
+        "croppedSample": true,
+        "requiresHighResolutionReplacement": true,
+        "approval": "Somente prévia; aprovar versões individuais em alta resolução antes da publicação definitiva"
+      },
+      "sha256": "5b299a1796d3fbed2d44f8d9745b79aefc7969848a26e06f83c5e0ef0f6b8027"
+    },
+    {
+      "file": "ANI_04_Fundo_do_Mar.jpg",
+      "title": "Encantos do Fundo do Mar",
+      "category": "Aniversários",
+      "description": "Um ensaio de aniversário inspirado no oceano, com corais, pérolas e tons brilhantes.",
+      "promptOriginal": "Fotografia editorial realista de aniversário infantil, criança em figurino de sereia fantasia, cenário submarino cenográfico com conchas, corais e pérolas, iluminação azul e rosa, sem texto ou logotipo.",
+      "quality": {
+        "width": 768,
+        "height": 512,
+        "croppedSample": true,
+        "requiresHighResolutionReplacement": true,
+        "approval": "Somente prévia; aprovar versões individuais em alta resolução antes da publicação definitiva"
+      },
+      "sha256": "4d54449f92740315c2e72386da4545f8712fbba3fa1df1e65d19f47b75254105"
+    }
+  ]
+}
