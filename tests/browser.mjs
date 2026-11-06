@@ -132,7 +132,7 @@ const base = process.env.TEST_BASE_URL || "http://127.0.0.1:3001";
     .click();
   assert.equal(await page.locator("textarea").count(), 0);
   await page.goto(base + "/galeria");
-  assert.equal(await page.locator(".photo-card").count(), 14);
+  assert.equal(await page.locator(".photo-card").count(), 17);
   const galleryThemes = [
     "Recém-nascidos",
     "Ensaios infantis",
@@ -156,23 +156,60 @@ const base = process.env.TEST_BASE_URL || "http://127.0.0.1:3001";
     path: path.join(process.cwd(), "docs/preview/galeria-desktop.png"),
     fullPage: true,
   });
+  await page
+    .getByRole("button", { name: "Recém-nascidos", exact: true })
+    .click();
+  assert.equal(await page.locator(".photo-card").count(), 4);
+  for (const [title, width, height] of [
+    ["Doce Soninho", 1122, 1402],
+    ["Pequeno Anjo", 407, 625],
+    ["Jardim dos Sonhos", 412, 625],
+  ]) {
+    await page
+      .getByRole("button", { name: "Ampliar " + title, exact: true })
+      .click();
+    await page.waitForFunction(() => document.querySelector("dialog").open);
+    const img = page.locator(".lightbox-content > img");
+    await img.evaluate((i) => i.decode());
+    assert.deepEqual(
+      await img.evaluate((i) => [i.naturalWidth, i.naturalHeight]),
+      [width, height],
+    );
+    if (title !== "Doce Soninho")
+      assert.match(
+        await page.locator(".catalog-details").innerText(),
+        /substituir antes de publicar/,
+      );
+    const source = await page
+      .locator(".catalog-actions a")
+      .getAttribute("href");
+    assert.equal((await context.request.get(base + source)).status(), 200);
+    assert(
+      !(await page
+        .locator("main")
+        .innerText()
+        .then((t) => t.includes("Prompt de estilo"))),
+    );
+    await page.keyboard.press("Escape");
+  }
+  await page.getByRole("button", { name: "Todos", exact: true }).click();
   const trigger = page.locator(".photo-card").first();
   await trigger.click();
   await page.waitForFunction(() => document.querySelector("dialog").open);
   assert.match(
     await page.locator(".catalog-details").innerText(),
-    /Primeiros sonhos/,
+    /Doce Soninho/,
   );
   assert.match(
     await page.locator(".catalog-details").innerText(),
-    /sem bebê real/,
+    /tricô delicado/,
   );
   await page
     .getByRole("button", { name: "Quero um ensaio assim", exact: true })
     .click();
   assert.match(
     await page.getByRole("textbox", { name: "Resumo do ensaio" }).inputValue(),
-    /Primeiros sonhos/,
+    /Doce Soninho/,
   );
   assert.match(
     await page.getByRole("textbox", { name: "Resumo do ensaio" }).inputValue(),
@@ -198,14 +235,12 @@ const base = process.env.TEST_BASE_URL || "http://127.0.0.1:3001";
   );
   assert.match(
     await page.evaluate(() => navigator.clipboard.readText()),
-    /Primeiros sonhos/,
+    /Doce Soninho/,
   );
   assert.equal(orderRequests, 0, "Gallery inquiry must not transmit data");
-  await page
-    .locator(".gallery-inquiry")
-    .screenshot({
-      path: path.join(process.cwd(), "docs/preview/galeria-solicitacao.png"),
-    });
+  await page.locator(".gallery-inquiry").screenshot({
+    path: path.join(process.cwd(), "docs/preview/galeria-solicitacao.png"),
+  });
   await page.keyboard.press("Escape");
   assert.equal(await page.locator("dialog").evaluate((d) => d.open), false);
   assert(

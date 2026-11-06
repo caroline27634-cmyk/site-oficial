@@ -1,0 +1,52 @@
+{
+  "collection": "Recém-nascidos",
+  "source": "colecao_recem_nascidos_codex.zip",
+  "usage": "Prompts fornecidos para referência futura; não são executados nem exibidos ao visitante. Os exemplos recebidos são personagens fictícios de IA. Qualquer referência futura deve ser fictícia ou autorizada.",
+  "items": [
+    {
+      "file": "RN_01_Doce_Soninho.jpg",
+      "title": "Doce Soninho",
+      "category": "Recém-nascidos",
+      "description": "Um ensaio clássico e aconchegante em tons de bege, com tricô delicado, cestinha de vime e ursinho de pelúcia.",
+      "promptOriginal": "Criar retrato fotográfico profissional do bebê da foto de referência, preservando suas características faciais sem inventar identidade. Cenário de estúdio bege, cesta de vime acolchoada, manta e gorro de tricô creme com orelhinhas, ursinho de pelúcia bege ao lado, luz suave e quente, textura realista, enquadramento vertical 4:5. Não alterar a anatomia, não acrescentar dedos ou membros, sem texto ou marcas. Priorizar segurança: não colocar bebê real em pose arriscada; composições de fantasia são digitais.",
+      "quality": {
+        "width": 1122,
+        "height": 1402,
+        "croppedSample": false,
+        "requiresHighResolutionReplacement": false,
+        "approval": "Somente prévia; publicação não autorizada"
+      },
+      "sha256": "4071db0a949bb65201df8c6b8989ea7c3ed536d2dc8db43803c145845b732e9b"
+    },
+    {
+      "file": "RN_02_Pequeno_Anjo.jpg",
+      "title": "Pequeno Anjo",
+      "category": "Recém-nascidos",
+      "description": "Um cenário celestial delicado, com nuvens fofinhas, lua dourada e pequenas estrelas luminosas.",
+      "promptOriginal": "Retrato fotográfico de fantasia do bebê da foto de referência, preservando características faciais. Bebê aparentemente dormindo sobre nuvens digitais, cenário celestial lavanda e rosa-claro, lua crescente dourada e estrelas brilhantes, asas de anjo como elemento visual digital decorativo, roupa branca delicada, luz suave, realismo cinematográfico, vertical 4:5. Sem texto ou marcas; não representar cenário como pose física real.",
+      "quality": {
+        "width": 407,
+        "height": 625,
+        "croppedSample": true,
+        "requiresHighResolutionReplacement": true,
+        "approval": "Somente prévia; publicação não autorizada"
+      },
+      "sha256": "75992615b1fbc3369e71b79c299018d7c32c29d2875344a6bae9361ad83bb397"
+    },
+    {
+      "file": "RN_03_Jardim_dos_Sonhos.jpg",
+      "title": "Jardim dos Sonhos",
+      "category": "Recém-nascidos",
+      "description": "Um jardim encantado de rosas delicadas, tons rosados e luzes quentes, com atmosfera romântica.",
+      "promptOriginal": "Retrato fotográfico de fantasia do bebê da foto de referência, preservando características faciais. Bebê em repouso seguro sobre manta rosa, roupa de renda rosa e coroa de flores, jardim digital de rosas cor-de-rosa, folhagens e lanternas quentes ao fundo, bokeh suave, estética fotográfica realista, vertical 4:5. Sem texto ou marcas, sem poses físicas arriscadas.",
+      "quality": {
+        "width": 412,
+        "height": 625,
+        "croppedSample": true,
+        "requiresHighResolutionReplacement": true,
+        "approval": "Somente prévia; publicação não autorizada"
+      },
+      "sha256": "86814b4a83ead09e3886f79ea422df46ddfd58f831c8c53cc0fc036f5838a13b"
+    }
+  ]
+}

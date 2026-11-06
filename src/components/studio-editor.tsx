@@ -309,6 +309,29 @@ export function StudioEditor({
                   </option>
                 </select>
               </label>
+              <label>
+                Qualidade do arquivo
+                <select
+                  value={p.sample ? "sample" : "regular"}
+                  onChange={(e) =>
+                    set(
+                      "photos",
+                      data.photos.map((x) =>
+                        x.id === p.id
+                          ? { ...x, sample: e.target.value === "sample" }
+                          : x,
+                      ),
+                    )
+                  }
+                >
+                  <option value="regular">
+                    Imagem individual — revisar antes de publicar
+                  </option>
+                  <option value="sample">
+                    Amostra recortada — substituir por alta resolução
+                  </option>
+                </select>
+              </label>
               <div className="admin-inline gallery-order">
                 <span>
                   Posição {i + 1} de {data.photos.length}

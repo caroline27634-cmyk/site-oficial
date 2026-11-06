@@ -2,9 +2,9 @@
 
 ## O que mudou
 
-A rota `/galeria` apresenta as oito categorias solicitadas e 14 referências temporárias de ensaio. As nove imagens do catálogo anterior continuam presentes, com seus identificadores, títulos e arquivos preservados. Os seis exemplos editoriais anteriores estão agrupados em Transformações com IA como referências de atmosfera e cenários; não são apresentados como retratos finais.
+A rota `/galeria` apresenta as oito categorias solicitadas e 17 referências de ensaio (14 ilustrações anteriores e três fotografias demonstrativas de IA da coleção Recém-nascidos). As nove imagens do catálogo anterior continuam presentes, com seus identificadores, títulos e arquivos preservados. Os seis exemplos editoriais anteriores estão agrupados em Transformações com IA como referências de atmosfera e cenários; não são apresentados como retratos finais.
 
-Cada cartão abre uma imagem ampliada, título, categoria e descrição. O original abre em outra aba sem recortar ou reduzir o arquivo. As imagens atuais são ilustrações temporárias feitas com auxílio de IA, não fotografias de pessoas reais ou recortes de uma montagem. Fotografias exclusivas de personagens fictícios podem substituí-las depois.
+Cada cartão abre uma imagem ampliada, título, categoria e descrição. O original abre em outra aba sem recortar ou reduzir o arquivo. O acervo anterior usa ilustrações temporárias feitas com auxílio de IA. A coleção Recém-nascidos acrescenta três fotografias demonstrativas de personagens fictícios; duas são amostras recortadas explicitamente identificadas e pendentes de substituição antes da publicação. Veja `docs/colecoes/RECEM_NASCIDOS.md` para a avaliação e os prompts organizados.
 
 “Quero um ensaio assim” abre a escolha de canal e um resumo com nome, categoria, descrição e identificador do exemplo. O visitante copia a referência e envia pelo Instagram Direct ou Messenger. Não há preenchimento automático presumido nem envio de mensagens. Links ainda vazios aparecem indisponíveis, com explicação; não foram inventados perfis.
 

@@ -110,6 +110,11 @@ export function Gallery({
                 ? "Personagem fictício · IA"
                 : "Ilustração temporária"}
             </span>
+            {p.sample && (
+              <span className="catalog-label">
+                Amostra recortada · alta resolução pendente
+              </span>
+            )}
           </button>
         ))}
       </div>
@@ -120,9 +125,10 @@ export function Gallery({
         </p>
       )}
       <p className="demo-note">
-        Imagens demonstrativas criadas com inteligência artificial. Nesta
-        prévia, usamos apenas ilustrações temporárias: não são fotografias
-        finais nem imagens de clientes.
+        Imagens demonstrativas criadas com inteligência artificial. Os
+        resultados personalizados podem variar conforme a fotografia enviada. O
+        acervo inclui ilustrações temporárias e amostras recortadas
+        identificadas; não são imagens de clientes.
       </p>
       <dialog
         ref={dialog}
@@ -178,6 +184,13 @@ export function Gallery({
                   ? "Imagem demonstrativa criada com IA · personagem fictício"
                   : "Ilustração temporária · arquivo definitivo em preparação"}
               </span>
+              {photo.sample && (
+                <p className="demo-note">
+                  Amostra recortada de apresentação composta. Versão individual
+                  de alta resolução pendente; substituir antes de publicar. O
+                  arquivo foi preservado sem ampliação artificial.
+                </p>
+              )}
               <h2>{photo.title}</h2>
               <p>
                 {photo.description ||

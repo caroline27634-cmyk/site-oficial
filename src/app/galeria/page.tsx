@@ -11,7 +11,7 @@ export default async function Page() {
       <PageIntro
         eyebrow="NOSSO UNIVERSO CRIATIVO"
         title="Um retrato de possibilidades."
-        description="Escolha um tema, descubra as possibilidades e encontre a inspiração para o seu ensaio virtual com inteligência artificial. As imagens desta prévia são ilustrações temporárias, que serão substituídas por fotografias exclusivas de personagens fictícios."
+        description="Escolha um tema, descubra as possibilidades e encontre a inspiração para o seu ensaio virtual com inteligência artificial. O acervo reúne fotografias demonstrativas de personagens fictícios e ilustrações temporárias. As amostras recortadas estão identificadas e aguardam versões individuais de alta resolução."
       />
       <Gallery
         photos={c.photos.map((p) => ({

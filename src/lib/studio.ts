@@ -1,4 +1,5 @@
 import { photos } from "./content";
+import { newbornCollection } from "./newborn-collection";
 import { galleryCategories } from "./gallery";
 export type Photo = {
   id: string;
@@ -7,6 +8,7 @@ export type Photo = {
   image: string;
   description?: string;
   kind?: "placeholder" | "ai";
+  sample?: boolean;
 };
 export type Service = {
   id: string;
@@ -50,6 +52,7 @@ export const defaults: StudioContent = {
   instagramDirect: "",
   categories: [...galleryCategories],
   photos: [
+    ...newbornCollection,
     {
       id: "newborn-demo",
       title: "Primeiros sonhos",

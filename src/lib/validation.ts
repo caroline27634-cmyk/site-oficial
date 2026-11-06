@@ -50,6 +50,7 @@ export const contentSchema = z
           image: imagePath,
           description: z.string().trim().max(2000).default(""),
           kind: z.enum(["placeholder", "ai"]).default("placeholder"),
+          sample: z.boolean().default(false),
         }),
       )
       .max(500),

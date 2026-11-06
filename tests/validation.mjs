@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { createHash } from "node:crypto";
 import fs from "node:fs";
 import ts from "typescript";
 import { createRequire } from "node:module";
@@ -132,7 +133,11 @@ const { galleryCategories, catalogCategory, movePhoto, inquirySummary } = load(
 );
 assert.equal(galleryCategories.length, 8);
 assert.deepEqual(defaults.categories, galleryCategories);
-assert(defaults.photos.every((p) => p.description && p.kind === "placeholder"));
+assert(
+  defaults.photos.every(
+    (p) => p.description && ["placeholder", "ai"].includes(p.kind),
+  ),
+);
 assert(
   galleryCategories.every((c) => defaults.photos.some((p) => p.album === c)),
 );
@@ -164,7 +169,7 @@ assert.equal(
 assert.equal(catalogCategory("Infantis"), "Ensaios infantis");
 assert.equal(catalogCategory("Paisagens"), "Transformações com IA");
 assert.equal(catalogCategory("Tema personalizado"), "Tema personalizado");
-assert.match(inquirySummary(defaults.photos[0]), /Primeiros sonhos/);
+assert.match(inquirySummary(defaults.photos[0]), /Doce Soninho/);
 assert.match(inquirySummary(defaults.photos[0]), /Recém-nascidos/);
 assert.match(inquirySummary(defaults.photos[0]), /não representa pagamento/);
 const legacy = {
@@ -190,4 +195,52 @@ assert(
 );
 console.log(
   "PASS: oito categorias, compatibilidade do acervo, descrições, classificação IA, resumo, ordenação e preços preservados.",
+);
+
+const { newbornCollection } = load("../src/lib/newborn-collection.ts");
+const collectionNotes = JSON.parse(
+  fs.readFileSync(
+    new URL("../docs/colecoes/recem-nascidos.prompts.json", import.meta.url),
+    "utf8",
+  ),
+);
+assert.equal(newbornCollection.length, 3);
+assert.deepEqual(
+  newbornCollection.map((p) => p.sample),
+  [false, true, true],
+);
+assert.equal(defaults.photos.length, 17);
+assert.equal(
+  defaults.photos.filter((p) => p.album === "Recém-nascidos").length,
+  4,
+);
+for (const photo of newbornCollection) {
+  assert.equal(photo.kind, "ai");
+  assert(!("prompt" in photo) && !("promptOriginal" in photo));
+  const documented = collectionNotes.items.find((item) =>
+    photo.image.endsWith(item.file),
+  );
+  assert(documented && documented.promptOriginal.length > 100);
+  assert.equal(photo.title, documented.title);
+  assert.equal(photo.description, documented.description);
+  const bytes = fs.readFileSync(
+    new URL("../public" + photo.image, import.meta.url),
+  );
+  assert.equal(bytes[0], 255);
+  assert.equal(bytes[1], 216);
+  assert.equal(
+    createHash("sha256").update(bytes).digest("hex"),
+    documented.sha256,
+    "Original image must not be edited",
+  );
+}
+assert.equal(migrated.photos[0].sample, false);
+assert(
+  !contentSchema.safeParse({
+    ...defaults,
+    photos: [{ ...legacy, sample: "yes" }],
+  }).success,
+);
+console.log(
+  "PASS: coleção RN, textos fornecidos, arquivos originais, prompts separados e identificação das duas amostras.",
 );
