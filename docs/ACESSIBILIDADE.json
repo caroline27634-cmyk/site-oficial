@@ -1,0 +1,1046 @@
+[
+  {
+    "route": "/",
+    "violations": [
+      {
+        "id": "color-contrast",
+        "impact": "serious",
+        "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+        "nodes": [
+          [
+            ".header-inner > .brand.studio-brand[href=\"/\"] > span > small"
+          ],
+          [
+            ".studio-hero-copy > .eyebrow"
+          ],
+          [
+            ".studio-hero-copy > p:nth-child(4)"
+          ],
+          [
+            ".studio-hero-note"
+          ],
+          [
+            ".studio-seal"
+          ],
+          [
+            ".hero-art-caption > span:nth-child(1)"
+          ],
+          [
+            ".hero-art-caption > span:nth-child(2)"
+          ],
+          [
+            ".section-heading > div > .eyebrow"
+          ],
+          [
+            ".studio-invitation > .eyebrow"
+          ],
+          [
+            ".studio-invitation > p"
+          ],
+          [
+            ".footer-top > div:nth-child(1) > .brand.studio-brand[href=\"/\"] > span > small"
+          ],
+          [
+            ".footer-top > div:nth-child(1) > p"
+          ],
+          [
+            ".footer-top > div:nth-child(1) > .eyebrow"
+          ],
+          [
+            "div:nth-child(2) > .eyebrow"
+          ],
+          [
+            ".footer-nav > a[href=\"/\"]"
+          ],
+          [
+            ".footer-nav > a[href$=\"quem-somos\"]"
+          ],
+          [
+            ".footer-nav > a[href$=\"nossos-servicos\"]"
+          ],
+          [
+            ".footer-nav > a[href$=\"precos-e-pacotes\"]"
+          ],
+          [
+            ".footer-nav > a[href$=\"galeria\"]"
+          ],
+          [
+            ".footer-nav > a[href$=\"como-funciona\"]"
+          ],
+          [
+            "div:nth-child(3) > .eyebrow"
+          ],
+          [
+            "div:nth-child(3) > p"
+          ],
+          [
+            "a[href$=\"publicacoes\"]"
+          ],
+          [
+            "a[href$=\"privacidade\"]"
+          ],
+          [
+            "a[href$=\"admin\"]"
+          ],
+          [
+            ".footer-bottom > span:nth-child(1)"
+          ],
+          [
+            ".footer-bottom > span:nth-child(2)"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "route": "/quem-somos",
+    "violations": [
+      {
+        "id": "color-contrast",
+        "impact": "serious",
+        "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+        "nodes": [
+          [
+            ".header-inner > .brand.studio-brand[href=\"/\"] > span > small"
+          ],
+          [
+            ".page-intro > .eyebrow"
+          ],
+          [
+            ".page-intro > p"
+          ],
+          [
+            ".about-split > div > .eyebrow"
+          ],
+          [
+            ".about-split > div > p:nth-child(3)"
+          ],
+          [
+            "p:nth-child(5)"
+          ],
+          [
+            "p:nth-child(7)"
+          ],
+          [
+            ".footer-top > div:nth-child(1) > .brand.studio-brand[href=\"/\"] > span > small"
+          ],
+          [
+            ".footer-top > div:nth-child(1) > p"
+          ],
+          [
+            ".footer-top > div:nth-child(1) > .eyebrow"
+          ],
+          [
+            ".footer-top > div:nth-child(2) > .eyebrow"
+          ],
+          [
+            ".footer-nav > a[href=\"/\"]"
+          ],
+          [
+            ".footer-nav > a[href$=\"quem-somos\"]"
+          ],
+          [
+            ".footer-nav > a[href$=\"nossos-servicos\"]"
+          ],
+          [
+            ".footer-nav > a[href$=\"precos-e-pacotes\"]"
+          ],
+          [
+            ".footer-nav > a[href$=\"galeria\"]"
+          ],
+          [
+            ".footer-nav > a[href$=\"como-funciona\"]"
+          ],
+          [
+            "div:nth-child(3) > .eyebrow"
+          ],
+          [
+            "div:nth-child(3) > p"
+          ],
+          [
+            "a[href$=\"publicacoes\"]"
+          ],
+          [
+            "a[href$=\"privacidade\"]"
+          ],
+          [
+            "a[href$=\"admin\"]"
+          ],
+          [
+            ".footer-bottom > span:nth-child(1)"
+          ],
+          [
+            ".footer-bottom > span:nth-child(2)"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "route": "/nossos-servicos",
+    "violations": [
+      {
+        "id": "color-contrast",
+        "impact": "serious",
+        "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+        "nodes": [
+          [
+            ".header-inner > .brand.studio-brand[href=\"/\"] > span > small"
+          ],
+          [
+            ".page-intro > .eyebrow"
+          ],
+          [
+            ".page-intro > p"
+          ],
+          [
+            "#infantis > article > div > .eyebrow"
+          ],
+          [
+            "#infantis > article > div > p"
+          ],
+          [
+            "#mesversarios > article > div > .eyebrow"
+          ],
+          [
+            "#mesversarios > article > div > p"
+          ],
+          [
+            "#aniversarios > article > div > .eyebrow"
+          ],
+          [
+            "#aniversarios > article > div > p"
+          ],
+          [
+            "#datas > article > div > .eyebrow"
+          ],
+          [
+            "#datas > article > div > p"
+          ],
+          [
+            "#convites > article > div > .eyebrow"
+          ],
+          [
+            "#convites > article > div > p"
+          ],
+          [
+            "#transformacoes > article > div > .eyebrow"
+          ],
+          [
+            "#transformacoes > article > div > p"
+          ],
+          [
+            ".demo-note"
+          ],
+          [
+            ".footer-top > div:nth-child(1) > .brand.studio-brand[href=\"/\"] > span > small"
+          ],
+          [
+            ".footer-top > div:nth-child(1) > p"
+          ],
+          [
+            ".footer-top > div:nth-child(1) > .eyebrow"
+          ],
+          [
+            ".footer-top > div:nth-child(2) > .eyebrow"
+          ],
+          [
+            ".footer-nav > a[href=\"/\"]"
+          ],
+          [
+            ".footer-nav > a[href$=\"quem-somos\"]"
+          ],
+          [
+            ".footer-nav > a[href$=\"nossos-servicos\"]"
+          ],
+          [
+            ".footer-nav > a[href$=\"precos-e-pacotes\"]"
+          ],
+          [
+            ".footer-nav > a[href$=\"galeria\"]"
+          ],
+          [
+            ".footer-nav > a[href$=\"como-funciona\"]"
+          ],
+          [
+            "div:nth-child(3) > .eyebrow"
+          ],
+          [
+            "div:nth-child(3) > p"
+          ],
+          [
+            "a[href$=\"publicacoes\"]"
+          ],
+          [
+            "a[href$=\"privacidade\"]"
+          ],
+          [
+            "a[href$=\"admin\"]"
+          ],
+          [
+            ".footer-bottom > span:nth-child(1)"
+          ],
+          [
+            ".footer-bottom > span:nth-child(2)"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "route": "/precos-e-pacotes",
+    "violations": [
+      {
+        "id": "color-contrast",
+        "impact": "serious",
+        "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+        "nodes": [
+          [
+            ".header-inner > .brand.studio-brand[href=\"/\"] > span > small"
+          ],
+          [
+            ".page-intro > .eyebrow"
+          ],
+          [
+            ".page-intro > p"
+          ],
+          [
+            "article:nth-child(1) > .eyebrow"
+          ],
+          [
+            "article:nth-child(1) > p:nth-child(4)"
+          ],
+          [
+            "article:nth-child(1) > span:nth-child(6)"
+          ],
+          [
+            "article:nth-child(1) > .package-footnote"
+          ],
+          [
+            ".featured > .eyebrow"
+          ],
+          [
+            ".featured > p:nth-child(4)"
+          ],
+          [
+            ".featured > span:nth-child(6)"
+          ],
+          [
+            ".featured > .package-footnote"
+          ],
+          [
+            "article:nth-child(3) > .eyebrow"
+          ],
+          [
+            "article:nth-child(3) > p:nth-child(4)"
+          ],
+          [
+            "article:nth-child(3) > span:nth-child(6)"
+          ],
+          [
+            "article:nth-child(3) > .package-footnote"
+          ],
+          [
+            ".info-panel > p"
+          ],
+          [
+            ".footer-top > div:nth-child(1) > .brand.studio-brand[href=\"/\"] > span > small"
+          ],
+          [
+            ".footer-top > div:nth-child(1) > p"
+          ],
+          [
+            ".footer-top > div:nth-child(1) > .eyebrow"
+          ],
+          [
+            "div:nth-child(2) > .eyebrow"
+          ],
+          [
+            ".footer-nav > a[href=\"/\"]"
+          ],
+          [
+            ".footer-nav > a[href$=\"quem-somos\"]"
+          ],
+          [
+            ".footer-nav > a[href$=\"nossos-servicos\"]"
+          ],
+          [
+            ".footer-nav > a[href$=\"precos-e-pacotes\"]"
+          ],
+          [
+            ".footer-nav > a[href$=\"galeria\"]"
+          ],
+          [
+            ".footer-nav > a[href$=\"como-funciona\"]"
+          ],
+          [
+            "div:nth-child(3) > .eyebrow"
+          ],
+          [
+            ".footer-top > div:nth-child(3) > p"
+          ],
+          [
+            "a[href$=\"publicacoes\"]"
+          ],
+          [
+            "a[href$=\"privacidade\"]"
+          ],
+          [
+            "a[href$=\"admin\"]"
+          ],
+          [
+            ".footer-bottom > span:nth-child(1)"
+          ],
+          [
+            ".footer-bottom > span:nth-child(2)"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "route": "/galeria",
+    "violations": [
+      {
+        "id": "color-contrast",
+        "impact": "serious",
+        "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+        "nodes": [
+          [
+            ".header-inner > .brand.studio-brand[href=\"/\"] > span > small"
+          ],
+          [
+            ".page-intro > .eyebrow"
+          ],
+          [
+            ".page-intro > p"
+          ],
+          [
+            ".filters > button:nth-child(1)"
+          ],
+          [
+            "button[title=\"Ampliar Doce Soninho\"] > .photo-caption > span"
+          ],
+          [
+            "button[title=\"Ampliar Doce Soninho\"] > .catalog-description"
+          ],
+          [
+            "button[title=\"Ampliar Doce Soninho\"] > .catalog-label"
+          ],
+          [
+            "button[title=\"Ampliar Pequeno Anjo\"] > .photo-caption > span"
+          ],
+          [
+            "button[title=\"Ampliar Pequeno Anjo\"] > .catalog-description"
+          ],
+          [
+            "button[title=\"Ampliar Pequeno Anjo\"] > .catalog-label:nth-child(4)"
+          ],
+          [
+            "button[title=\"Ampliar Pequeno Anjo\"] > .catalog-label:nth-child(5)"
+          ],
+          [
+            "button[title=\"Ampliar Jardim dos Sonhos\"] > .photo-caption > span"
+          ],
+          [
+            "button[title=\"Ampliar Jardim dos Sonhos\"] > .catalog-description"
+          ],
+          [
+            "button[title=\"Ampliar Jardim dos Sonhos\"] > .catalog-label:nth-child(4)"
+          ],
+          [
+            "button[title=\"Ampliar Jardim dos Sonhos\"] > .catalog-label:nth-child(5)"
+          ],
+          [
+            "button[title=\"Ampliar Doce Encanto\"] > .photo-caption > span"
+          ],
+          [
+            "button[title=\"Ampliar Doce Encanto\"] > .catalog-description"
+          ],
+          [
+            "button[title=\"Ampliar Doce Encanto\"] > .catalog-label:nth-child(4)"
+          ],
+          [
+            "button[title=\"Ampliar Doce Encanto\"] > .catalog-label:nth-child(5)"
+          ],
+          [
+            "button[title=\"Ampliar Jardim das Fadas\"] > .photo-caption > span"
+          ],
+          [
+            "button[title=\"Ampliar Jardim das Fadas\"] > .catalog-description"
+          ],
+          [
+            "button[title=\"Ampliar Jardim das Fadas\"] > .catalog-label:nth-child(4)"
+          ],
+          [
+            "button[title=\"Ampliar Jardim das Fadas\"] > .catalog-label:nth-child(5)"
+          ],
+          [
+            "button[title=\"Ampliar Pequeno Aviador\"] > .photo-caption > span"
+          ],
+          [
+            "button[title=\"Ampliar Pequeno Aviador\"] > .catalog-description"
+          ],
+          [
+            "button[title=\"Ampliar Pequeno Aviador\"] > .catalog-label:nth-child(4)"
+          ],
+          [
+            "button[title=\"Ampliar Pequeno Aviador\"] > .catalog-label:nth-child(5)"
+          ],
+          [
+            "button[title=\"Ampliar Reino dos Sonhos\"] > .photo-caption > span"
+          ],
+          [
+            "button[title=\"Ampliar Reino dos Sonhos\"] > .catalog-description"
+          ],
+          [
+            "button[title=\"Ampliar Reino dos Sonhos\"] > .catalog-label:nth-child(4)"
+          ],
+          [
+            "button[title=\"Ampliar Reino dos Sonhos\"] > .catalog-label:nth-child(5)"
+          ],
+          [
+            "button[title=\"Ampliar Ursinho dos Sonhos\"] > .photo-caption > span"
+          ],
+          [
+            "button[title=\"Ampliar Ursinho dos Sonhos\"] > .catalog-description"
+          ],
+          [
+            "button[title=\"Ampliar Ursinho dos Sonhos\"] > .catalog-label:nth-child(4)"
+          ],
+          [
+            "button[title=\"Ampliar Ursinho dos Sonhos\"] > .catalog-label:nth-child(5)"
+          ],
+          [
+            "button[title=\"Ampliar Pequena Princesa\"] > .photo-caption > span"
+          ],
+          [
+            "button[title=\"Ampliar Pequena Princesa\"] > .catalog-description"
+          ],
+          [
+            "button[title=\"Ampliar Pequena Princesa\"] > .catalog-label:nth-child(4)"
+          ],
+          [
+            "button[title=\"Ampliar Pequena Princesa\"] > .catalog-label:nth-child(5)"
+          ],
+          [
+            "button[title=\"Ampliar Safari Encantado\"] > .photo-caption > span"
+          ],
+          [
+            "button[title=\"Ampliar Safari Encantado\"] > .catalog-description"
+          ],
+          [
+            "button[title=\"Ampliar Safari Encantado\"] > .catalog-label:nth-child(4)"
+          ],
+          [
+            "button[title=\"Ampliar Safari Encantado\"] > .catalog-label:nth-child(5)"
+          ],
+          [
+            "button[title=\"Ampliar Abelhinha do Amor\"] > .photo-caption > span"
+          ],
+          [
+            "button[title=\"Ampliar Abelhinha do Amor\"] > .catalog-description"
+          ],
+          [
+            "button[title=\"Ampliar Abelhinha do Amor\"] > .catalog-label:nth-child(4)"
+          ],
+          [
+            "button[title=\"Ampliar Abelhinha do Amor\"] > .catalog-label:nth-child(5)"
+          ],
+          [
+            "button[title=\"Ampliar Princesa do Castelo\"] > .photo-caption > span"
+          ],
+          [
+            "button[title=\"Ampliar Princesa do Castelo\"] > .catalog-description"
+          ],
+          [
+            "button[title=\"Ampliar Princesa do Castelo\"] > .catalog-label:nth-child(4)"
+          ],
+          [
+            "button[title=\"Ampliar Princesa do Castelo\"] > .catalog-label:nth-child(5)"
+          ],
+          [
+            "button[title=\"Ampliar Pequeno Cowboy\"] > .photo-caption > span"
+          ],
+          [
+            "button[title=\"Ampliar Pequeno Cowboy\"] > .catalog-description"
+          ],
+          [
+            "button[title=\"Ampliar Pequeno Cowboy\"] > .catalog-label:nth-child(4)"
+          ],
+          [
+            "button[title=\"Ampliar Pequeno Cowboy\"] > .catalog-label:nth-child(5)"
+          ],
+          [
+            "button[title=\"Ampliar Aventura Jurássica\"] > .photo-caption > span"
+          ],
+          [
+            "button[title=\"Ampliar Aventura Jurássica\"] > .catalog-description"
+          ],
+          [
+            "button[title=\"Ampliar Aventura Jurássica\"] > .catalog-label:nth-child(4)"
+          ],
+          [
+            "button[title=\"Ampliar Aventura Jurássica\"] > .catalog-label:nth-child(5)"
+          ],
+          [
+            ".photo-card[aria-haspopup=\"dialog\"][aria-controls=\"gallery-lightbox\"]:nth-child(15) > .photo-caption > span"
+          ],
+          [
+            ".photo-card[aria-haspopup=\"dialog\"][aria-controls=\"gallery-lightbox\"]:nth-child(15) > .catalog-description"
+          ],
+          [
+            ".photo-card[aria-haspopup=\"dialog\"][aria-controls=\"gallery-lightbox\"]:nth-child(15) > .catalog-label:nth-child(4)"
+          ],
+          [
+            ".photo-card[aria-haspopup=\"dialog\"][aria-controls=\"gallery-lightbox\"]:nth-child(15) > .catalog-label:nth-child(5)"
+          ],
+          [
+            "button[title=\"Ampliar Primeiros sonhos\"] > .photo-caption > span"
+          ],
+          [
+            "button[title=\"Ampliar Primeiros sonhos\"] > .catalog-description"
+          ],
+          [
+            "button[title=\"Ampliar Primeiros sonhos\"] > .catalog-label"
+          ],
+          [
+            ".photo-card[aria-haspopup=\"dialog\"][aria-controls=\"gallery-lightbox\"]:nth-child(17) > .photo-caption > span"
+          ],
+          [
+            ".photo-card[aria-haspopup=\"dialog\"][aria-controls=\"gallery-lightbox\"]:nth-child(17) > .catalog-description"
+          ],
+          [
+            ".photo-card[aria-haspopup=\"dialog\"][aria-controls=\"gallery-lightbox\"]:nth-child(17) > .catalog-label"
+          ],
+          [
+            ".photo-card[aria-haspopup=\"dialog\"][aria-controls=\"gallery-lightbox\"]:nth-child(18) > .photo-caption > span"
+          ],
+          [
+            ".photo-card[aria-haspopup=\"dialog\"][aria-controls=\"gallery-lightbox\"]:nth-child(18) > .catalog-description"
+          ],
+          [
+            ".photo-card[aria-haspopup=\"dialog\"][aria-controls=\"gallery-lightbox\"]:nth-child(18) > .catalog-label"
+          ],
+          [
+            ".photo-card[aria-haspopup=\"dialog\"][aria-controls=\"gallery-lightbox\"]:nth-child(19) > .photo-caption > span"
+          ],
+          [
+            ".photo-card[aria-haspopup=\"dialog\"][aria-controls=\"gallery-lightbox\"]:nth-child(19) > .catalog-description"
+          ],
+          [
+            ".photo-card[aria-haspopup=\"dialog\"][aria-controls=\"gallery-lightbox\"]:nth-child(19) > .catalog-label"
+          ],
+          [
+            "button[title=\"Ampliar Datas para encantar\"] > .photo-caption > span"
+          ],
+          [
+            "button[title=\"Ampliar Datas para encantar\"] > .catalog-description"
+          ],
+          [
+            "button[title=\"Ampliar Datas para encantar\"] > .catalog-label"
+          ],
+          [
+            "button[title=\"Ampliar Laços e novos começos\"] > .photo-caption > span"
+          ],
+          [
+            "button[title=\"Ampliar Laços e novos começos\"] > .catalog-description"
+          ],
+          [
+            "button[title=\"Ampliar Laços e novos começos\"] > .catalog-label"
+          ],
+          [
+            "button[title=\"Ampliar Um convite ao encanto\"] > .photo-caption > span"
+          ],
+          [
+            "button[title=\"Ampliar Um convite ao encanto\"] > .catalog-description"
+          ],
+          [
+            "button[title=\"Ampliar Um convite ao encanto\"] > .catalog-label"
+          ],
+          [
+            ".photo-card[aria-haspopup=\"dialog\"][aria-controls=\"gallery-lightbox\"]:nth-child(23) > .photo-caption > span"
+          ],
+          [
+            ".photo-card[aria-haspopup=\"dialog\"][aria-controls=\"gallery-lightbox\"]:nth-child(23) > .catalog-description"
+          ],
+          [
+            ".photo-card[aria-haspopup=\"dialog\"][aria-controls=\"gallery-lightbox\"]:nth-child(23) > .catalog-label"
+          ],
+          [
+            "button[title=\"Ampliar Horizontes tranquilos\"] > .photo-caption > span"
+          ],
+          [
+            "button[title=\"Ampliar Horizontes tranquilos\"] > .catalog-description"
+          ],
+          [
+            "button[title=\"Ampliar Horizontes tranquilos\"] > .catalog-label"
+          ],
+          [
+            "button[title=\"Ampliar Entre formas e cores\"] > .photo-caption > span"
+          ],
+          [
+            "button[title=\"Ampliar Entre formas e cores\"] > .catalog-description"
+          ],
+          [
+            "button[title=\"Ampliar Entre formas e cores\"] > .catalog-label"
+          ],
+          [
+            "button[title=\"Ampliar Geometria urbana\"] > .photo-caption > span"
+          ],
+          [
+            "button[title=\"Ampliar Geometria urbana\"] > .catalog-description"
+          ],
+          [
+            "button[title=\"Ampliar Geometria urbana\"] > .catalog-label"
+          ],
+          [
+            "button[title=\"Ampliar Pausa para o essencial\"] > .photo-caption > span"
+          ],
+          [
+            "button[title=\"Ampliar Pausa para o essencial\"] > .catalog-description"
+          ],
+          [
+            "button[title=\"Ampliar Pausa para o essencial\"] > .catalog-label"
+          ],
+          [
+            ".photo-card[aria-haspopup=\"dialog\"][aria-controls=\"gallery-lightbox\"]:nth-child(28) > .photo-caption > span"
+          ],
+          [
+            ".photo-card[aria-haspopup=\"dialog\"][aria-controls=\"gallery-lightbox\"]:nth-child(28) > .catalog-description"
+          ],
+          [
+            ".photo-card[aria-haspopup=\"dialog\"][aria-controls=\"gallery-lightbox\"]:nth-child(28) > .catalog-label"
+          ],
+          [
+            "button[title=\"Ampliar Novas perspectivas\"] > .photo-caption > span"
+          ],
+          [
+            "button[title=\"Ampliar Novas perspectivas\"] > .catalog-description"
+          ],
+          [
+            "button[title=\"Ampliar Novas perspectivas\"] > .catalog-label"
+          ],
+          [
+            ".demo-note"
+          ],
+          [
+            ".footer-top > div:nth-child(1) > .brand.studio-brand[href=\"/\"] > span > small"
+          ],
+          [
+            ".footer-top > div:nth-child(1) > p"
+          ],
+          [
+            ".footer-top > div:nth-child(1) > .eyebrow"
+          ],
+          [
+            "div:nth-child(2) > .eyebrow"
+          ],
+          [
+            ".footer-nav > a[href=\"/\"]"
+          ],
+          [
+            ".footer-nav > a[href$=\"quem-somos\"]"
+          ],
+          [
+            ".footer-nav > a[href$=\"nossos-servicos\"]"
+          ],
+          [
+            ".footer-nav > a[href$=\"precos-e-pacotes\"]"
+          ],
+          [
+            ".footer-nav > a[href$=\"galeria\"]"
+          ],
+          [
+            ".footer-nav > a[href$=\"como-funciona\"]"
+          ],
+          [
+            "div:nth-child(3) > .eyebrow"
+          ],
+          [
+            "div:nth-child(3) > p"
+          ],
+          [
+            "a[href$=\"publicacoes\"]"
+          ],
+          [
+            "a[href$=\"privacidade\"]"
+          ],
+          [
+            "a[href$=\"admin\"]"
+          ],
+          [
+            ".footer-bottom > span:nth-child(1)"
+          ],
+          [
+            ".footer-bottom > span:nth-child(2)"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "route": "/como-funciona",
+    "violations": [
+      {
+        "id": "color-contrast",
+        "impact": "serious",
+        "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+        "nodes": [
+          [
+            ".header-inner > .brand.studio-brand[href=\"/\"] > span > small"
+          ],
+          [
+            ".page-intro > .eyebrow"
+          ],
+          [
+            ".page-intro > p"
+          ],
+          [
+            "article:nth-child(1) > .step-number"
+          ],
+          [
+            "article:nth-child(1) > p"
+          ],
+          [
+            "article:nth-child(2) > .step-number"
+          ],
+          [
+            "article:nth-child(2) > p"
+          ],
+          [
+            "article:nth-child(3) > .step-number"
+          ],
+          [
+            "article:nth-child(3) > p"
+          ],
+          [
+            "article:nth-child(4) > .step-number"
+          ],
+          [
+            "article:nth-child(4) > p"
+          ],
+          [
+            ".info-panel > p"
+          ],
+          [
+            ".footer-top > div:nth-child(1) > .brand.studio-brand[href=\"/\"] > span > small"
+          ],
+          [
+            ".footer-top > div:nth-child(1) > p"
+          ],
+          [
+            ".footer-top > div:nth-child(1) > .eyebrow"
+          ],
+          [
+            "div:nth-child(2) > .eyebrow"
+          ],
+          [
+            ".footer-nav > a[href=\"/\"]"
+          ],
+          [
+            ".footer-nav > a[href$=\"quem-somos\"]"
+          ],
+          [
+            ".footer-nav > a[href$=\"nossos-servicos\"]"
+          ],
+          [
+            ".footer-nav > a[href$=\"precos-e-pacotes\"]"
+          ],
+          [
+            ".footer-nav > a[href$=\"galeria\"]"
+          ],
+          [
+            ".footer-nav > a[href$=\"como-funciona\"]"
+          ],
+          [
+            "div:nth-child(3) > .eyebrow"
+          ],
+          [
+            ".footer-top > div:nth-child(3) > p"
+          ],
+          [
+            "a[href$=\"publicacoes\"]"
+          ],
+          [
+            ".footer-nav > a[href$=\"privacidade\"]"
+          ],
+          [
+            "a[href$=\"admin\"]"
+          ],
+          [
+            ".footer-bottom > span:nth-child(1)"
+          ],
+          [
+            ".footer-bottom > span:nth-child(2)"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "route": "/contato",
+    "violations": [
+      {
+        "id": "color-contrast",
+        "impact": "serious",
+        "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+        "nodes": [
+          [
+            ".header-inner > .brand.studio-brand[href=\"/\"] > span > small"
+          ],
+          [
+            ".page-intro > .eyebrow"
+          ],
+          [
+            ".page-intro > p"
+          ],
+          [
+            "aside > p:nth-child(2)"
+          ],
+          [
+            ".social-box > .eyebrow"
+          ],
+          [
+            ".social-box > p"
+          ],
+          [
+            ".demo-note"
+          ],
+          [
+            "form > .eyebrow"
+          ],
+          [
+            ".form-notice:nth-child(9)"
+          ],
+          [
+            "p[role=\"status\"]"
+          ],
+          [
+            ".footer-top > div:nth-child(1) > .brand.studio-brand[href=\"/\"] > span > small"
+          ],
+          [
+            ".footer-top > div:nth-child(1) > p"
+          ],
+          [
+            ".footer-top > div:nth-child(1) > .eyebrow"
+          ],
+          [
+            "div:nth-child(2) > .eyebrow"
+          ],
+          [
+            ".footer-nav > a[href=\"/\"]"
+          ],
+          [
+            ".footer-nav > a[href$=\"quem-somos\"]"
+          ],
+          [
+            ".footer-nav > a[href$=\"nossos-servicos\"]"
+          ],
+          [
+            ".footer-nav > a[href$=\"precos-e-pacotes\"]"
+          ],
+          [
+            ".footer-nav > a[href$=\"galeria\"]"
+          ],
+          [
+            ".footer-nav > a[href$=\"como-funciona\"]"
+          ],
+          [
+            ".footer-top > div:nth-child(3) > .eyebrow"
+          ],
+          [
+            ".footer-top > div:nth-child(3) > p"
+          ],
+          [
+            "a[href$=\"publicacoes\"]"
+          ],
+          [
+            ".footer-nav > a[href$=\"privacidade\"]"
+          ],
+          [
+            "a[href$=\"admin\"]"
+          ],
+          [
+            ".footer-bottom > span:nth-child(1)"
+          ],
+          [
+            ".footer-bottom > span:nth-child(2)"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "route": "/admin/login",
+    "violations": [
+      {
+        "id": "color-contrast",
+        "impact": "serious",
+        "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+        "nodes": [
+          [
+            ".header-inner > .brand.studio-brand[href=\"/\"] > span > small"
+          ],
+          [
+            "section > .eyebrow"
+          ],
+          [
+            ".info-panel > p"
+          ],
+          [
+            ".footer-top > div:nth-child(1) > .brand.studio-brand[href=\"/\"] > span > small"
+          ],
+          [
+            "div:nth-child(1) > p"
+          ],
+          [
+            "div:nth-child(1) > .eyebrow"
+          ],
+          [
+            "div:nth-child(2) > .eyebrow"
+          ],
+          [
+            ".footer-nav > a[href=\"/\"]"
+          ],
+          [
+            ".footer-nav > a[href$=\"quem-somos\"]"
+          ],
+          [
+            ".footer-nav > a[href$=\"nossos-servicos\"]"
+          ],
+          [
+            ".footer-nav > a[href$=\"precos-e-pacotes\"]"
+          ],
+          [
+            ".footer-nav > a[href$=\"galeria\"]"
+          ],
+          [
+            ".footer-nav > a[href$=\"como-funciona\"]"
+          ],
+          [
+            "div:nth-child(3) > .eyebrow"
+          ],
+          [
+            ".footer-top > div:nth-child(3) > p"
+          ],
+          [
+            "a[href$=\"publicacoes\"]"
+          ],
+          [
+            "a[href$=\"privacidade\"]"
+          ],
+          [
+            "a[href$=\"admin\"]"
+          ],
+          [
+            ".footer-bottom > span:nth-child(1)"
+          ],
+          [
+            ".footer-bottom > span:nth-child(2)"
+          ]
+        ]
+      }
+    ]
+  }
+]
