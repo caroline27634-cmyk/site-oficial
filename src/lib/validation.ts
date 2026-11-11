@@ -5,7 +5,8 @@ export const imagePath = z
   .max(2000)
   .refine(
     (v) =>
-      /^\/images\/[a-zA-Z0-9/_.-]+$/.test(v) ||
+      (/^\/images\/[a-zA-Z0-9/_.-]+$/.test(v) &&
+        !v.split("/").includes("..")) ||
       /^https:\/\/[a-z0-9.-]+\.supabase\.co\/storage\/v1\/object\/public\/portfolio\/[a-zA-Z0-9/_.-]+$/.test(
         v,
       ),
@@ -43,16 +44,18 @@ export const contentSchema = z
     categories: z.array(z.string().trim().min(1).max(100)).max(100),
     photos: z
       .array(
-        z.object({
-          id: z.string().min(1).max(100),
-          title: text,
-          album: text,
-          image: imagePath,
-          description: z.string().trim().max(2000).default(""),
-          kind: z.enum(["placeholder", "ai"]).default("placeholder"),
-          sample: z.boolean().default(false),
-          customization: z.string().trim().max(500).default(""),
-        }),
+        z
+          .object({
+            id: z.string().min(1).max(100),
+            title: text,
+            album: text,
+            image: imagePath,
+            description: z.string().trim().max(2000).default(""),
+            kind: z.enum(["placeholder", "ai"]).default("placeholder"),
+            sample: z.boolean().default(false),
+            customization: z.string().trim().max(500).default(""),
+          })
+          .strict(),
       )
       .max(500),
     services: z
@@ -78,7 +81,18 @@ export const contentSchema = z
       .min(1)
       .max(20),
   })
+  .strict()
   .superRefine((c, ctx) => {
+    if (
+      new Set(c.categories).size !== c.categories.length ||
+      c.categories.includes("Todos")
+    )
+      ctx.addIssue({
+        code: "custom",
+        message:
+          "Categorias devem ser únicas; Todos é reservado para o filtro.",
+        path: ["categories"],
+      });
     for (const key of ["photos", "services", "packages"] as const) {
       if (new Set(c[key].map((p) => p.id)).size !== c[key].length)
         ctx.addIssue({

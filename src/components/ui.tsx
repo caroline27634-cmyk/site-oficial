@@ -4,12 +4,8 @@ import { ArrowUpRight, Asterisk } from "lucide-react";
 import { posts, formatDate, socialLinks } from "@/lib/content";
 export function Brand() {
   return (
-    <Link
-      href="/"
-      className="brand studio-brand"
-      aria-label="Encanto no Retrato Studio IA, início"
-    >
-      <Asterisk size={32} />
+    <Link href="/" className="brand studio-brand">
+      <Asterisk size={32} aria-hidden="true" />
       <span>
         Encanto no Retrato<small>STUDIO IA</small>
       </span>

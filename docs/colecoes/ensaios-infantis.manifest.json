@@ -1,15 +1,11 @@
 {
   "collection": "Ensaios infantis",
-  "source": "colecao_ensaios_infantis_codex.zip",
-  "usage": "Documentação de reprodução futura. Não executada nem importada pelos componentes públicos. Os modelos recebidos são crianças fictícias geradas por IA.",
-  "commonPromptOriginal": "Usar a foto enviada pelo responsável como referência de identidade da criança, com consentimento. Preservar características faciais, idade aparente, tom de pele, cabelo e expressão natural. Alterar principalmente figurino, iluminação e cenário. Não copiar a identidade da criança demonstrativa. Retrato fotográfico vertical, luz profissional, anatomia natural, sem texto, sem marca-d'água. Resultado pode variar; conferir identidade e artefatos antes da entrega.",
   "items": [
     {
       "file": "INF_01_Doce_Encanto.jpg",
       "title": "Doce Encanto",
       "category": "Ensaios infantis",
       "description": "Um retrato clássico e delicado, com vestido rendado, tons creme e iluminação suave de estúdio.",
-      "promptOriginal": "Retrato profissional de estúdio infantil, vestido elegante de renda creme e laço de tecido no cabelo, fundo bege claro com flores suaves, luz difusa quente, pose natural sorridente, profundidade de campo rasa, estética fine art realista.",
       "quality": {
         "width": 634,
         "height": 579,
@@ -24,7 +20,6 @@
       "title": "Jardim das Fadas",
       "category": "Ensaios infantis",
       "description": "Um jardim encantado de flores rosadas, asas luminosas e borboletas douradas.",
-      "promptOriginal": "Retrato fotográfico infantil em jardim encantado com flores rosas, asas de fada translúcidas e luminosas, borboleta dourada flutuando à frente, vestido rosa com flores, brilho sutil e luz cinematográfica de fim de tarde, fantasia fotorrealista.",
       "quality": {
         "width": 668,
         "height": 579,
@@ -39,7 +34,6 @@
       "title": "Pequeno Aviador",
       "category": "Ensaios infantis",
       "description": "Uma aventura vintage com roupa de aviador, avião de madeira e cenário de viagem.",
-      "promptOriginal": "Retrato fotográfico infantil com capacete vintage de aviador e óculos de proteção, jaqueta marrom e cachecol creme, sentado com segurança em cenário de avião de madeira decorativo, mapa e globo ao fundo, iluminação quente, estilo editorial realista.",
       "quality": {
         "width": 634,
         "height": 611,
@@ -54,7 +48,6 @@
       "title": "Reino dos Sonhos",
       "category": "Ensaios infantis",
       "description": "Um pequeno príncipe diante de um castelo de conto de fadas ao pôr do sol.",
-      "promptOriginal": "Retrato infantil de príncipe de conto de fadas, capa azul-escura com detalhes dourados e coroa leve, castelo de fantasia ao fundo, flores discretas, luz dourada do pôr do sol, estilo cinematográfico fotorrealista.",
       "quality": {
         "width": 668,
         "height": 611,

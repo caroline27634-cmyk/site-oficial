@@ -82,7 +82,9 @@ export function Gallery({
               setInquiring(false);
               setActive(i);
             }}
-            aria-label={"Ampliar " + p.title}
+            title={"Ampliar " + p.title}
+            aria-haspopup="dialog"
+            aria-controls="gallery-lightbox"
           >
             <div>
               <Image
@@ -132,6 +134,7 @@ export function Gallery({
       </p>
       <dialog
         ref={dialog}
+        id="gallery-lightbox"
         className="lightbox catalog-lightbox"
         aria-label="Imagem ampliada"
         onCancel={() => {

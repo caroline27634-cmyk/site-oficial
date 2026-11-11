@@ -19,8 +19,8 @@ Todos estão marcados `sample: true`: o aviso de recorte e substituição aparec
 
 - Dados públicos: `src/lib/children-collection.ts`, com os títulos e descrições exatos da tabela fornecida.
 - Imagens: `public/images/ensaios-infantis/`.
-- Prompts e orientação comum originais: `docs/colecoes/ensaios-infantis.prompts.json`.
-- Documento recebido: `docs/colecoes/INSTRUCOES_E_PROMPTS_INFANTIS.md`.
+- Prompts e orientação comum originais: `docs/colecoes/ensaios-infantis.manifest.json` (metadados públicos; prompts em `.private/prompts/import.json` e no painel protegido).
+- Documento recebido: `.private/originais/` (cópia local ignorada pelo Git).
 
 Prompts não são importados pelos componentes nem colocados na pasta pública; não aparecem na galeria e não foram executados. Qualquer uso futuro de fotografias de clientes exige autorização do responsável; as identidades dos modelos demonstrativos não devem ser copiadas.
 

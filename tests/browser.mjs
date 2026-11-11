@@ -34,9 +34,10 @@ const base = process.env.TEST_BASE_URL || "http://127.0.0.1:3001";
   for (const route of routes) {
     const res = await page.goto(base + route);
     assert.equal(res.status(), 200, route);
+    assert.equal(res.headers()["x-content-type-options"], "nosniff");
     assert.equal(await page.locator("h1").count(), 1, route);
   }
-  for (const route of ["/admin", "/admin/marketing"]) {
+  for (const route of ["/admin", "/admin/marketing", "/admin/prompts"]) {
     await page.goto(base + route);
     await page.waitForURL("**/admin/login");
     assert.match(
@@ -108,9 +109,9 @@ const base = process.env.TEST_BASE_URL || "http://127.0.0.1:3001";
   );
   assert.equal(
     await page
-      .getByRole("button", { name: "Conversar pelo Instagram", exact: true })
-      .isDisabled(),
-    true,
+      .getByRole("link", { name: "Conversar pelo Instagram", exact: false })
+      .getAttribute("href"),
+    "https://ig.me/m/encantonoretrato.studioia",
   );
   await page.getByRole("button", { name: "Copiar resumo do pedido" }).click();
   await page.waitForFunction(() =>
@@ -165,9 +166,7 @@ const base = process.env.TEST_BASE_URL || "http://127.0.0.1:3001";
     ["Pequeno Anjo", 407, 625],
     ["Jardim dos Sonhos", 412, 625],
   ]) {
-    await page
-      .getByRole("button", { name: "Ampliar " + title, exact: true })
-      .click();
+    await page.getByTitle("Ampliar " + title, { exact: true }).click();
     await page.waitForFunction(() => document.querySelector("dialog").open);
     const img = page.locator(".lightbox-content > img");
     await img.evaluate((i) => i.decode());
@@ -210,9 +209,7 @@ const base = process.env.TEST_BASE_URL || "http://127.0.0.1:3001";
     ["Pequeno Aviador", 634, 611],
     ["Reino dos Sonhos", 668, 611],
   ]) {
-    await page
-      .getByRole("button", { name: "Ampliar " + title, exact: true })
-      .click();
+    await page.getByTitle("Ampliar " + title, { exact: true }).click();
     await page.waitForFunction(() => document.querySelector("dialog").open);
     const image = page.locator(".lightbox-content > img");
     await image.evaluate((i) => i.decode());
@@ -276,9 +273,7 @@ const base = process.env.TEST_BASE_URL || "http://127.0.0.1:3001";
     "Safari Encantado",
     "Abelhinha do Amor",
   ]) {
-    await page
-      .getByRole("button", { name: "Ampliar " + title, exact: true })
-      .click();
+    await page.getByTitle("Ampliar " + title, { exact: true }).click();
     await page.waitForFunction(() => document.querySelector("dialog").open);
     const image = page.locator(".lightbox-content > img");
     await image.evaluate((i) => i.decode());
@@ -338,9 +333,7 @@ const base = process.env.TEST_BASE_URL || "http://127.0.0.1:3001";
     "Aventura Jurássica",
     "Encantos do Fundo do Mar",
   ]) {
-    await page
-      .getByRole("button", { name: "Ampliar " + title, exact: true })
-      .click();
+    await page.getByTitle("Ampliar " + title, { exact: true }).click();
     await page.waitForFunction(() => document.querySelector("dialog").open);
     const image = page.locator(".lightbox-content > img");
     await image.evaluate((i) => i.decode());
@@ -399,10 +392,11 @@ const base = process.env.TEST_BASE_URL || "http://127.0.0.1:3001";
     await page.getByRole("textbox", { name: "Resumo do ensaio" }).inputValue(),
     /Recém-nascidos/,
   );
-  assert(
+  assert.equal(
     await page
-      .getByRole("button", { name: "Conversar pelo Instagram", exact: true })
-      .isDisabled(),
+      .getByRole("link", { name: "Conversar pelo Instagram", exact: false })
+      .getAttribute("href"),
+    "https://ig.me/m/encantonoretrato.studioia",
   );
   assert(
     await page
@@ -561,6 +555,20 @@ const base = process.env.TEST_BASE_URL || "http://127.0.0.1:3001";
     data: {},
   });
   assert.equal(foreign.status(), 403);
+  for (const privatePath of [
+    "/.private/prompts/import.json",
+    "/docs/colecoes/recem-nascidos.prompts.json",
+  ])
+    assert.equal((await context.request.get(base + privatePath)).status(), 404);
+  assert.equal(
+    (
+      await context.request.post(base + "/api/orcamentos", {
+        headers: { origin: base },
+        data: "x".repeat(16001),
+      })
+    ).status(),
+    413,
+  );
   assert.deepEqual(errors, []);
   console.log(
     "PASS: rotas, proteção admin/marketing, preços e seleção, resumo/copiar/limpar, ausência de envio sem consentimento, galeria preservada, modal, menu, 4 larguras responsivas, API inválida/indisponível/origem. Zero erros JS.",

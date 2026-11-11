@@ -32,6 +32,19 @@ export const marketingSchema = z.object({
           "Publicada manualmente",
         ]),
         image: optionalImage,
+        link: z
+          .string()
+          .max(2000)
+          .default("")
+          .refine((v) => {
+            if (!v) return true;
+            try {
+              const u = new URL(v);
+              return u.protocol === "https:" && !u.username && !u.password;
+            } catch {
+              return false;
+            }
+          }, "Use um link HTTPS válido."),
         caption: long,
         hashtags: long,
         notes: long,

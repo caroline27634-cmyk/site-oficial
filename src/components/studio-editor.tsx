@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
-import { saveStudio, uploadPortfolio, deleteQuote } from "@/app/admin/actions";
+import { saveStudio, deleteQuote } from "@/app/admin/actions";
+import { uploadPortfolioFile } from "@/lib/client-upload";
 import type { StudioContent } from "@/lib/studio";
 import { galleryCategories, catalogCategory, movePhoto } from "@/lib/gallery";
 export type Quote = {
@@ -45,9 +46,7 @@ export function StudioEditor({
   async function upload(file: File, apply: (url: string) => void) {
     setBusy(true);
     try {
-      const form = new FormData();
-      form.set("file", file);
-      const res = await uploadPortfolio(form);
+      const res = await uploadPortfolioFile(file);
       if (res.url) apply(res.url);
       setStatus(
         res.error || "Imagem enviada. Salve as alterações para exibir no site.",

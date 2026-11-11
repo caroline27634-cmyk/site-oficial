@@ -12,8 +12,8 @@ Os quatro registros têm `kind: ai` e `sample: true`. O cartão e o modal exibem
 
 - Dados públicos: `src/lib/birthday-collection.ts`, com os títulos e descrições exatos fornecidos.
 - JPEGs originais: `public/images/aniversarios/`.
-- Prompts, orientação comum e avaliação: `docs/colecoes/aniversarios.prompts.json`.
-- Instruções recebidas: `docs/colecoes/INSTRUCOES_E_PROMPTS_ANIVERSARIOS.md`.
+- Prompts, orientação comum e avaliação: `docs/colecoes/aniversarios.manifest.json` (metadados públicos; prompts em `.private/prompts/import.json` e no painel protegido).
+- Instruções recebidas: `.private/originais/` (cópia local ignorada pelo Git).
 
 A documentação não fica em `public/`, não é uma rota e não é importada pela galeria. Os prompts não foram executados nem exibidos aos visitantes. Não foram adicionados dados de clientes ou credenciais.
 

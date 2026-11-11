@@ -9,7 +9,12 @@
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
     "test": "node tests/validation.mjs",
-    "test:browser": "node tests/browser.mjs"
+    "test:browser": "node tests/browser.mjs",
+    "test:db": "node tests/database.mjs",
+    "test:security": "node tests/security.mjs",
+    "test:a11y": "node tests/accessibility.mjs",
+    "seed:public": "node scripts/seed-public.mjs",
+    "check:production": "node scripts/production-readiness.mjs"
   },
   "dependencies": {
     "@supabase/ssr": "^0.12.7",
@@ -18,16 +23,25 @@
     "next": "^16.0.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
+    "sharp": "^0.35.5",
     "zod": "^4.6.7"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.14.0",
+    "@electric-sql/pglite": "^0.5.16",
     "@tailwindcss/postcss": "^4.1.0",
     "@types/node": "^24.0.0",
     "@types/react": "^19.2.0",
     "@types/react-dom": "^19.2.0",
     "eslint": "^9.0.0",
     "eslint-config-next": "^16.0.0",
+    "playwright-core": "^1.65.0",
     "tailwindcss": "^4.1.0",
     "typescript": "^5.9.0"
+  },
+  "overrides": {
+    "@typescript-eslint/typescript-estree": {
+      "minimatch": "^11.0.7"
+    }
   }
 }

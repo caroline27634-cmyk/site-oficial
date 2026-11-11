@@ -200,7 +200,7 @@ console.log(
 const { newbornCollection } = load("../src/lib/newborn-collection.ts");
 const collectionNotes = JSON.parse(
   fs.readFileSync(
-    new URL("../docs/colecoes/recem-nascidos.prompts.json", import.meta.url),
+    new URL("../docs/colecoes/recem-nascidos.manifest.json", import.meta.url),
     "utf8",
   ),
 );
@@ -220,7 +220,7 @@ for (const photo of newbornCollection) {
   const documented = collectionNotes.items.find((item) =>
     photo.image.endsWith(item.file),
   );
-  assert(documented && documented.promptOriginal.length > 100);
+  assert(documented && !("promptOriginal" in documented));
   assert.equal(photo.title, documented.title);
   assert.equal(photo.description, documented.description);
   const bytes = fs.readFileSync(
@@ -248,7 +248,7 @@ console.log(
 const { childrenCollection } = load("../src/lib/children-collection.ts");
 const childrenNotes = JSON.parse(
   fs.readFileSync(
-    new URL("../docs/colecoes/ensaios-infantis.prompts.json", import.meta.url),
+    new URL("../docs/colecoes/ensaios-infantis.manifest.json", import.meta.url),
     "utf8",
   ),
 );
@@ -261,7 +261,7 @@ assert.deepEqual(
   childrenCollection.map((p) => p.title),
   ["Doce Encanto", "Jardim das Fadas", "Pequeno Aviador", "Reino dos Sonhos"],
 );
-assert(childrenNotes.commonPromptOriginal.includes("consentimento"));
+assert(!("commonPromptOriginal" in childrenNotes));
 for (const photo of childrenCollection) {
   assert.equal(photo.album, "Ensaios infantis");
   assert.equal(photo.kind, "ai");
@@ -270,7 +270,7 @@ for (const photo of childrenCollection) {
   const item = childrenNotes.items.find((item) =>
     photo.image.endsWith(item.file),
   );
-  assert(item && item.promptOriginal.length > 100);
+  assert(item && !("promptOriginal" in item));
   assert.equal(photo.title, item.title);
   assert.equal(photo.description, item.description);
   assert.equal(item.quality.requiresHighResolutionReplacement, true);
@@ -286,7 +286,7 @@ console.log(
 const { monthlyCollection } = load("../src/lib/monthly-collection.ts");
 const monthlyNotes = JSON.parse(
   fs.readFileSync(
-    new URL("../docs/colecoes/mesversarios.prompts.json", import.meta.url),
+    new URL("../docs/colecoes/mesversarios.manifest.json", import.meta.url),
     "utf8",
   ),
 );
@@ -314,8 +314,8 @@ for (const photo of monthlyCollection) {
     photo.image.endsWith(item.file),
   );
   assert.equal(photo.description, item.description);
-  assert(item.promptOriginal.length > 100);
-  assert.equal(item.personalization.monthsVariable, "{{meses}}");
+  assert(!("promptOriginal" in item));
+  assert(!("personalization" in item));
   assert(!("promptOriginal" in photo));
   const bytes = fs.readFileSync(
     new URL("../public" + photo.image, import.meta.url),
@@ -336,7 +336,7 @@ console.log(
 const { birthdayCollection } = load("../src/lib/birthday-collection.ts");
 const birthdayNotes = JSON.parse(
   fs.readFileSync(
-    new URL("../docs/colecoes/aniversarios.prompts.json", import.meta.url),
+    new URL("../docs/colecoes/aniversarios.manifest.json", import.meta.url),
     "utf8",
   ),
 );
@@ -354,14 +354,14 @@ assert.deepEqual(
     "Encantos do Fundo do Mar",
   ],
 );
-assert(birthdayNotes.commonGuidanceOriginal.includes("foto autorizada"));
+assert(!("commonGuidanceOriginal" in birthdayNotes));
 for (const photo of birthdayCollection) {
   assert.equal(photo.kind, "ai");
   assert.equal(photo.sample, true);
   assert.equal(photo.album, "Aniversários");
   assert(!("promptOriginal" in photo));
   const record = birthdayNotes.items.find((r) => photo.image.endsWith(r.file));
-  assert(record.promptOriginal.length > 100);
+  assert(!("promptOriginal" in record));
   assert.equal(photo.title, record.title);
   assert.equal(photo.description, record.description);
   assert.equal(record.quality.requiresHighResolutionReplacement, true);

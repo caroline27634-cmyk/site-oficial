@@ -16,8 +16,8 @@ A informação de origem IA e variação de resultados aparece na galeria. As am
 
 - `src/lib/newborn-collection.ts`: dados públicos, sem prompts.
 - `public/images/recem-nascidos/`: os três JPEGs originais.
-- `docs/colecoes/recem-nascidos.prompts.json`: títulos, descrições, prompts originais, dimensões, pendências e hashes, organizados para consulta futura.
-- `docs/colecoes/INSTRUCOES_PARA_CODEX_RECEM_NASCIDOS.md`: referência às instruções fornecidas.
+- `docs/colecoes/recem-nascidos.manifest.json` (metadados públicos; prompts em `.private/prompts/import.json` e no painel protegido): títulos, descrições, prompts originais, dimensões, pendências e hashes, organizados para consulta futura.
+- `.private/originais/` (cópia local ignorada pelo Git): referência às instruções fornecidas.
 
 Os documentos em `docs/` não são rotas ou arquivos estáticos públicos do site e não são importados pelos componentes. Os prompts são apenas registros: não foram executados. Referências futuras devem ser fictícias ou autorizadas; manter os exemplos como criações digitais, sem tratar cenários de fantasia como poses físicas reais.
 

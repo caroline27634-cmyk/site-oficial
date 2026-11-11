@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { saveMarketing } from "@/app/admin/marketing-actions";
 import { suggestions, type Marketing } from "@/lib/marketing";
-import { uploadPortfolio } from "@/app/admin/actions";
+import { uploadPortfolioFile } from "@/lib/client-upload";
 export function MarketingEditor({
   initial,
   initialRevision,
@@ -190,6 +190,7 @@ export function MarketingEditor({
                     channel: "Ambos",
                     status: "Rascunho",
                     image: "",
+                    link: "",
                     caption: "",
                     hashtags: "",
                     notes: "",
@@ -258,6 +259,16 @@ export function MarketingEditor({
                     </option>
                   ))}
                 </select>
+              </label>
+              <label>
+                Link de destino (opcional)
+                <input
+                  type="url"
+                  value={c.link || ""}
+                  onChange={(e) =>
+                    patch("campaigns", c.id, { link: e.target.value })
+                  }
+                />
               </label>
               <label>
                 Legenda
@@ -363,9 +374,7 @@ export function MarketingEditor({
                 if (!file) return;
                 setBusy(true);
                 try {
-                  const fd = new FormData();
-                  fd.set("file", file);
-                  const res = await uploadPortfolio(fd);
+                  const res = await uploadPortfolioFile(file);
                   if (res.url)
                     setData((d) => ({
                       ...d,
@@ -652,6 +661,7 @@ export function MarketingEditor({
                         caption: s.text,
                         hashtags: "",
                         image: "",
+                        link: "",
                         notes:
                           "Sugestão editorial: revisar preços, autorização de imagem e condições antes de aprovar.",
                       },

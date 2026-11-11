@@ -18,8 +18,8 @@ O campo opcional `customization` mantém a observação pública de personaliza�
 
 - Dados públicos: `src/lib/monthly-collection.ts`, com os títulos e descrições fornecidos.
 - Arquivos originais: `public/images/mesversarios/`.
-- Prompts, orientações e hashes: `docs/colecoes/mesversarios.prompts.json`.
-- Instruções recebidas: `docs/colecoes/INSTRUCOES_E_PROMPTS_MESVERSARIOS.md`.
+- Prompts, orientações e hashes: `docs/colecoes/mesversarios.manifest.json` (metadados públicos; prompts em `.private/prompts/import.json` e no painel protegido).
+- Instruções recebidas: `.private/originais/` (cópia local ignorada pelo Git).
 
 Os documentos não ficam em `public/`, não são rotas e não são importados pelos componentes. Os prompts não foram executados nem exibidos na galeria. Não há dados de clientes ou credenciais acrescentados.
 

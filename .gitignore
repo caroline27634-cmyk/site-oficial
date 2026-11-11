@@ -4,3 +4,13 @@ out/
 .env*
 !.env.example
 *.tsbuildinfo
+
+# Dados privados, tokens, dumps e arquivos de ferramentas locais
+.private/
+.vercel/
+*.pem
+*.key
+*.p12
+*.pfx
+test-results/
+playwright-report/

@@ -1,15 +1,11 @@
 {
   "collection": "Aniversários temáticos",
-  "source": "colecao_aniversarios_tematicos_codex.zip",
-  "usage": "Documentação de reprodução futura. Prompts não executados nem importados pela galeria. As imagens recebidas são demonstrações de IA e recortes de uma montagem.",
-  "commonGuidanceOriginal": "Ao personalizar, utilizar somente foto autorizada, tentar preservar características da pessoa, ajustar idade e figurino, sem prometer reprodução idêntica.",
   "items": [
     {
       "file": "ANI_01_Princesa_do_Castelo.jpg",
       "title": "Princesa do Castelo",
       "category": "Aniversários",
       "description": "Uma celebração de conto de fadas com vestido dourado, rosas e cenário de castelo.",
-      "promptOriginal": "Fotografia editorial realista de aniversário infantil, criança usando vestido dourado elegante e tiara, rosas vermelhas, cenário de castelo de conto de fadas, iluminação cinematográfica quente, composição profissional, sem texto ou logotipo.",
       "quality": {
         "width": 768,
         "height": 512,
@@ -24,7 +20,6 @@
       "title": "Pequeno Cowboy",
       "category": "Aniversários",
       "description": "Uma aventura de aniversário no velho oeste, com chapéu, feno e decoração rústica.",
-      "promptOriginal": "Fotografia editorial realista de aniversário infantil, criança com chapéu de cowboy marrom, lenço vermelho, colete e cenário de fazenda vintage com feno, cavalo de pelúcia, luz quente, sem texto ou logotipo.",
       "quality": {
         "width": 768,
         "height": 512,
@@ -39,7 +34,6 @@
       "title": "Aventura Jurássica",
       "category": "Aniversários",
       "description": "Um aniversário de explorador entre folhagens e dinossauros de fantasia.",
-      "promptOriginal": "Fotografia editorial realista de aniversário infantil, criança exploradora com roupa cáqui e chapéu safari, floresta pré-histórica cenográfica, dinossauros de brinquedo, folhagens tropicais, iluminação profissional, sem texto ou logotipo.",
       "quality": {
         "width": 768,
         "height": 512,
@@ -54,7 +48,6 @@
       "title": "Encantos do Fundo do Mar",
       "category": "Aniversários",
       "description": "Um ensaio de aniversário inspirado no oceano, com corais, pérolas e tons brilhantes.",
-      "promptOriginal": "Fotografia editorial realista de aniversário infantil, criança em figurino de sereia fantasia, cenário submarino cenográfico com conchas, corais e pérolas, iluminação azul e rosa, sem texto ou logotipo.",
       "quality": {
         "width": 768,
         "height": 512,

@@ -2,6 +2,7 @@
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { adminSession, sessionDb } from "@/lib/supabase";
+import { z } from "zod";
 import { contentSchema } from "@/lib/validation";
 export type ActionState = { error?: string; success?: string };
 export async function login(
@@ -10,9 +11,13 @@ export async function login(
 ): Promise<ActionState> {
   const db = await sessionDb();
   if (!db) return { error: "Configure o Supabase antes de acessar o painel." };
-  const email = String(form.get("email") || "");
+  const email = String(form.get("email") || "").trim();
   const password = String(form.get("password") || "");
-  if (!email || !password || email.length > 254 || password.length > 256)
+  if (
+    !z.email().max(254).safeParse(email).success ||
+    !password ||
+    password.length > 256
+  )
     return { error: "Informe e-mail e senha válidos." };
   const { error } = await db.auth.signInWithPassword({ email, password });
   if (error)
@@ -55,45 +60,6 @@ export async function saveStudio(raw: unknown, revision: number) {
     };
   revalidatePath("/", "layout");
   return { success: "Conteúdo salvo.", revision: data.revision as number };
-}
-export async function uploadPortfolio(form: FormData) {
-  const session = await adminSession();
-  if (!session) return { error: "Sessão inválida." };
-  const file = form.get("file");
-  if (!(file instanceof File) || file.size === 0 || file.size > 5 * 1024 * 1024)
-    return { error: "Selecione uma imagem de até 5 MB." };
-  const ext = (
-    { "image/jpeg": "jpg", "image/png": "png", "image/webp": "webp" } as Record<
-      string,
-      string
-    >
-  )[file.type];
-  if (!ext)
-    return { error: "Use JPEG, PNG ou WebP. SVG não é aceito em uploads." };
-  const bytes = new Uint8Array(await file.arrayBuffer());
-  const valid =
-    ext === "jpg"
-      ? bytes[0] === 255 && bytes[1] === 216
-      : ext === "png"
-        ? bytes[0] === 137 &&
-          bytes[1] === 80 &&
-          bytes[2] === 78 &&
-          bytes[3] === 71
-        : String.fromCharCode(...bytes.slice(0, 4)) === "RIFF" &&
-          String.fromCharCode(...bytes.slice(8, 12)) === "WEBP";
-  if (!valid) return { error: "Formato da imagem inválido." };
-  const path = `${session.user.id}/${crypto.randomUUID()}.${ext}`;
-  const { error } = await session.db.storage
-    .from("portfolio")
-    .upload(path, bytes, { contentType: file.type, upsert: false });
-  if (error)
-    return {
-      error:
-        "Não foi possível enviar a imagem. Verifique o Storage e as permissões.",
-    };
-  return {
-    url: session.db.storage.from("portfolio").getPublicUrl(path).data.publicUrl,
-  };
 }
 export async function deleteQuote(id: string) {
   const session = await adminSession();

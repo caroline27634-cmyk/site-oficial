@@ -1,0 +1,61 @@
+{
+  "collection": "Mesversários",
+  "items": [
+    {
+      "file": "MES_01_Ursinho_dos_Sonhos.jpg",
+      "title": "Ursinho dos Sonhos",
+      "category": "Mesversários",
+      "description": "Um mesversário aconchegante com ursinhos, tons terrosos e luzes delicadas.",
+      "quality": {
+        "width": 768,
+        "height": 512,
+        "croppedSample": true,
+        "requiresHighResolutionReplacement": true,
+        "approval": "Somente prévia; substituir por arquivo individual em alta resolução antes de publicar"
+      },
+      "sha256": "60f562a1721528292e47e7bebb0055473234a4a5cd413e6f823ad45171043d2d"
+    },
+    {
+      "file": "MES_02_Pequena_Princesa.jpg",
+      "title": "Pequena Princesa",
+      "category": "Mesversários",
+      "description": "Um cenário delicado com coroa, flores cor-de-rosa e castelo de conto de fadas.",
+      "quality": {
+        "width": 768,
+        "height": 512,
+        "croppedSample": true,
+        "requiresHighResolutionReplacement": true,
+        "approval": "Somente prévia; substituir por arquivo individual em alta resolução antes de publicar"
+      },
+      "sha256": "22f2ee73c336fc82a95d36471c74f4873ebc8ca1e5caf4627c9ae73b1c617fb5"
+    },
+    {
+      "file": "MES_03_Safari_Encantado.jpg",
+      "title": "Safari Encantado",
+      "category": "Mesversários",
+      "description": "Uma aventura cheia de ternura com animais de pelúcia e tons naturais.",
+      "quality": {
+        "width": 768,
+        "height": 512,
+        "croppedSample": true,
+        "requiresHighResolutionReplacement": true,
+        "approval": "Somente prévia; substituir por arquivo individual em alta resolução antes de publicar"
+      },
+      "sha256": "f8c2c47ee2bac987796fd4331e792d040572f5873570ac862b16259c654fcd44"
+    },
+    {
+      "file": "MES_04_Abelhinha_do_Amor.jpg",
+      "title": "Abelhinha do Amor",
+      "category": "Mesversários",
+      "description": "Um mesversário alegre com girassóis, abelhinhas e detalhes dourados.",
+      "quality": {
+        "width": 768,
+        "height": 512,
+        "croppedSample": true,
+        "requiresHighResolutionReplacement": true,
+        "approval": "Somente prévia; substituir por arquivo individual em alta resolução antes de publicar"
+      },
+      "sha256": "bf4d1dbb5883326593627cd33c4599d004eed60defd51be6a170585c3a8eb8bb"
+    }
+  ]
+}

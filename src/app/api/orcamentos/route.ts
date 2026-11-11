@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { publicDb } from "@/lib/supabase";
+import { boundedJson, BodyTooLarge } from "@/lib/request-body";
 import { quoteSchema } from "@/lib/validation";
 export async function POST(request: Request) {
   if (Number(request.headers.get("content-length") || 0) > 16000)
@@ -22,15 +23,17 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Origem inválida." }, { status: 403 });
   let input;
   try {
-    const body = await request.text();
-    if (body.length > 16000)
-      return NextResponse.json(
-        { error: "Mensagem muito longa." },
-        { status: 413 },
-      );
-    input = quoteSchema.safeParse(JSON.parse(body));
-  } catch {
-    return NextResponse.json({ error: "Dados inválidos." }, { status: 400 });
+    input = quoteSchema.safeParse(await boundedJson(request));
+  } catch (error) {
+    return NextResponse.json(
+      {
+        error:
+          error instanceof BodyTooLarge
+            ? "Mensagem muito longa."
+            : "Dados inválidos.",
+      },
+      { status: error instanceof BodyTooLarge ? 413 : 400 },
+    );
   }
   if (!input.success)
     return NextResponse.json(
@@ -60,6 +63,7 @@ export async function POST(request: Request) {
       p_service: input.data.service,
       p_package: input.data.package,
       p_theme: input.data.theme,
+      p_consent: input.data.consent,
     });
     if (error)
       return NextResponse.json(

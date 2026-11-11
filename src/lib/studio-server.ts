@@ -4,9 +4,9 @@ import { publicDb } from "./supabase";
 import { contentSchema } from "./validation";
 import { cache } from "react";
 export const loadStudio = cache(async () => {
-  const db = publicDb();
-  if (!db) return { content: defaults, connected: false };
   try {
+    const db = publicDb();
+    if (!db) return { content: defaults, connected: false };
     const { data, error } = await db
       .from("studio_content")
       .select("data,revision")

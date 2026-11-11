@@ -51,9 +51,9 @@ export const defaults: StudioContent = {
     "Celebrar histórias e fases especiais com imagens acessíveis, delicadas e cuidadosas, respeitando a privacidade e a autorização de cada família.",
   heroImage: "/images/studio-balloons.svg",
   facebook: "",
-  instagram: "",
+  instagram: "https://www.instagram.com/encantonoretrato.studioia/",
   messenger: "",
-  instagramDirect: "",
+  instagramDirect: "https://ig.me/m/encantonoretrato.studioia",
   categories: [...galleryCategories],
   photos: [
     ...newbornCollection,

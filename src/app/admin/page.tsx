@@ -36,6 +36,9 @@ export default async function Page() {
         </form>
       </div>
       <div className="admin-inline">
+        <Link className="button outline" href="/admin/prompts">
+          Prompts privados →
+        </Link>
         <Link className="button" href="/admin/marketing">
           Central de Divulgação e Marketing →
         </Link>
