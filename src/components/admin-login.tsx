@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import { useActionState } from "react";
 import { login } from "@/app/admin/actions";
 export function AdminLogin() {
@@ -22,10 +23,13 @@ export function AdminLogin() {
         {pending ? "Verificando…" : "Entrar no painel"}
       </button>
       <p role="status">{state.error}</p>
+      <Link className="text-link" href="/admin/esqueci-senha">
+        Esqueci minha senha
+      </Link>
       <p className="demo-note">
         Acesso apenas para contas previamente autorizadas. Não há cadastro
-        público. Para recuperar o acesso, solicite a redefinição ao
-        administrador do projeto Supabase.
+        público. Use a opção de recuperação se precisar cadastrar uma nova
+        senha.
       </p>
     </form>
   );

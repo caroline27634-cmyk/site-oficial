@@ -2,6 +2,7 @@
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { adminSession, sessionDb } from "@/lib/supabase";
+import { clearRecovery } from "@/lib/recovery-session";
 import { z } from "zod";
 import { contentSchema } from "@/lib/validation";
 export type ActionState = { error?: string; success?: string };
@@ -32,6 +33,7 @@ export async function login(
   redirect("/admin");
 }
 export async function logout() {
+  await clearRecovery();
   const db = await sessionDb();
   await db?.auth.signOut();
   redirect("/admin/login");

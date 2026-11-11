@@ -14,7 +14,8 @@
     "test:security": "node tests/security.mjs",
     "test:a11y": "node tests/accessibility.mjs",
     "seed:public": "node scripts/seed-public.mjs",
-    "check:production": "node scripts/production-readiness.mjs"
+    "check:production": "node scripts/production-readiness.mjs",
+    "test:recovery": "node tests/recovery-policy.mjs && node tests/recovery-flow.mjs"
   },
   "dependencies": {
     "@supabase/ssr": "^0.12.7",

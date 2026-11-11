@@ -32,7 +32,7 @@ on conflict do nothing;
 
 Ter uma conta no Auth não basta: apenas quem está nessa tabela é administrador. O usuário comum não consegue adicionar a si próprio. Revogue o acesso removendo a associação pelo SQL Editor; guarde ao menos uma conta administrativa válida.
 
-Configure limites de tentativa de login e recuperação no Supabase. Recuperação de acesso é feita pela administração do projeto; o site não simula envio de e-mail de redefinição. Antes da publicação, configure Site URL e URLs autorizadas com o domínio real. MFA não foi implementado nesta etapa.
+Configure limites de tentativa de login e recuperação no Supabase. A recuperação está disponível em `/admin/esqueci-senha`, pela API oficial do Supabase; configure as URLs e o template conforme `docs/RECUPERACAO_SENHA.md`. Nenhum e-mail é simulado na aplicação. Antes da publicação, configure Site URL e URLs autorizadas com o domínio real. MFA não foi implementado nesta etapa.
 
 ## 4. Configurar duas variáveis
 

@@ -7,12 +7,20 @@ export const metadata = {
   robots: { index: false, follow: false },
 };
 export const dynamic = "force-dynamic";
-export default async function Page() {
+export default async function Page({
+  searchParams,
+}: {
+  searchParams: Promise<{ senha?: string }>;
+}) {
+  const params = await searchParams;
   if (await adminSession()) redirect("/admin");
   return (
     <section className="container admin-placeholder">
       <span className="eyebrow">ACESSO RESTRITO</span>
       <h1>Seu espaço de criação.</h1>
+      {params.senha === "atualizada" && (
+        <p role="status">Senha atualizada. Entre com sua nova senha.</p>
+      )}
       {isConfigured() ? (
         <AdminLogin />
       ) : (

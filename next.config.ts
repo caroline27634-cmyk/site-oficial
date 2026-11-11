@@ -1,5 +1,6 @@
 import type { NextConfig } from "next";
 const config: NextConfig = {
+  logging: { incomingRequests: { ignore: [/^\/admin\/auth\/confirm/] } },
   experimental: { serverActions: { bodySizeLimit: "8mb" } },
   async headers() {
     return [
@@ -24,6 +25,7 @@ const config: NextConfig = {
         headers: [
           { key: "Cache-Control", value: "private, no-store, max-age=0" },
           { key: "X-Robots-Tag", value: "noindex, nofollow" },
+          { key: "Referrer-Policy", value: "no-referrer" },
         ],
       },
       {
