@@ -110,3 +110,7 @@ Se aparecer erro de autorização, confira o UUID em studio_admins. Se aparecer 
 Para repetir os testes isolados: `npm run build` e `npm run test:recovery`, com Chromium instalado. Eles iniciam um servidor local de teste na porta 3003, sem acesso ao Supabase real. Lint, build, tipos e demais testes são executados pelos scripts já existentes.
 
 Nenhuma página pública, preço, galeria, CSS ou branch main foi alterada. Não houve deploy.
+
+## Quando a solicitação falha com POST 200
+
+Use `npm run diagnose:recovery` para verificar a configuração sem enviar e-mails. Falhas de solicitação agora geram uma referência na tela e uma linha sanitizada `[auth.recovery]` no servidor, sem dados pessoais ou credenciais. POST 200 não confirma aceitação ou entrega do e-mail. Veja `docs/DIAGNOSTICO_RECUPERACAO.md` para interpretar status, códigos e erros de SMTP, sem alterar limites ou expor logs brutos.

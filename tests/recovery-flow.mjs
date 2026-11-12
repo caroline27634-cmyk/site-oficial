@@ -83,7 +83,10 @@ const upstream = http.createServer(async (req, res) => {
     (req.headers.authorization || "").replace("Bearer ", ""),
   );
   function json(status, data) {
-    res.writeHead(status, { "Content-Type": "application/json" });
+    res.writeHead(status, {
+      "Content-Type": "application/json",
+      "X-Supabase-Api-Version": "2024-01-01",
+    });
     res.end(JSON.stringify(data));
   }
   if (u.pathname === "/auth/v1/recover") {
@@ -93,6 +96,31 @@ const upstream = http.createServer(async (req, res) => {
         code: "over_email_send_rate_limit",
         msg: "Email rate limit exceeded",
       });
+    const failures = {
+      "smtp@example.test": {
+        status: 500,
+        code: "unexpected_failure",
+        msg: "Error sending recovery email: SMTP PRIVATE_SMTP_SENTINEL password=PRIVATE_CREDENTIAL_SENTINEL admin@example.test",
+      },
+      "key@example.test": {
+        status: 401,
+        code: "bad_jwt",
+        msg: "Invalid key PRIVATE_KEY_SENTINEL",
+      },
+      "captcha@example.test": {
+        status: 400,
+        code: "captcha_failed",
+        msg: "PRIVATE_CAPTCHA_SENTINEL",
+      },
+      "unknown@example.test": {
+        status: 500,
+        code: "PRIVATE_CODE_SENTINEL",
+        msg: "PRIVATE_UNKNOWN_SENTINEL",
+      },
+    };
+    const failed = failures[body.email];
+    if (failed)
+      return json(failed.status, { code: failed.code, msg: failed.msg });
     state.challenge = body.code_challenge;
     state.redirect = u.searchParams.get("redirect_to");
     return json(200, {});
@@ -193,6 +221,11 @@ const server = spawn(
     stdio: ["ignore", "pipe", "pipe"],
   },
 );
+let serverOutput = "";
+for (const stream of [server.stdout, server.stderr])
+  stream.on("data", (chunk) => {
+    serverOutput = (serverOutput + chunk.toString()).slice(-500000);
+  });
 // Do not echo request details, passwords or token fixtures to logs.
 let started = false;
 for (let i = 0; i < 100; i++) {
@@ -322,9 +355,66 @@ try {
   const count = state.recoveries;
   await new Promise((r) => setTimeout(r, 1200));
   assert.equal(state.recoveries, count, "No automatic retry");
+  const diagnosticCases = [
+    ["smtp@example.test", "email_delivery", 500, "unrecognized"],
+    ["key@example.test", "auth_configuration", 401, "bad_jwt"],
+    ["captcha@example.test", "captcha", 400, "captcha_failed"],
+    ["unknown@example.test", "provider_unclassified", 500, "unrecognized"],
+  ];
+  for (const [email, category, status, code] of diagnosticCases) {
+    const isolated = await browser.newContext();
+    const p = await isolated.newPage();
+    await p.goto(base + "/admin/esqueci-senha");
+    await p.locator("[name=email]").fill(email);
+    const actionResponse = p.waitForResponse(
+      (r) =>
+        r.request().method() === "POST" &&
+        new URL(r.url()).pathname === "/admin/esqueci-senha",
+    );
+    await p.getByRole("button", { name: "Enviar link de recuperação" }).click();
+    assert.equal(
+      (await actionResponse).status(),
+      200,
+      "Server Action transport success does not mean provider accepted email",
+    );
+    await p.waitForFunction(() =>
+      document
+        .querySelector("[role=status]")
+        ?.textContent.includes("Referência:"),
+    );
+    const shown = await p.getByRole("status").innerText();
+    const reference = shown.match(/Referência: ([a-f0-9-]{36})/)[1];
+    const records = serverOutput
+      .split("\n")
+      .filter((line) => line.includes("[auth.recovery]"))
+      .map((line) => {
+        try {
+          return JSON.parse(line.slice(line.indexOf("{")));
+        } catch {
+          return null;
+        }
+      })
+      .filter(Boolean);
+    const record = records.find((r) => r.reference === reference);
+    assert(record, "Server diagnostic reference must match UI");
+    assert.equal(record.category, category);
+    assert.equal(record.providerStatus, status);
+    assert.equal(record.providerCode, code);
+    assert.equal(record.stage, "provider");
+    assert.equal(record.configuration.requestOriginMatches, true);
+    await isolated.close();
+  }
+  assert(
+    !serverOutput.includes("PRIVATE_"),
+    "Raw provider error data must not reach server logs",
+  );
+  assert(
+    !serverOutput.includes("admin@example.test"),
+    "Email must not reach server logs",
+  );
   assert.equal(state.updates, 1);
   console.log(
-    "PASS: fixture local — solicitação sem e-mail real, PKCE/HttpOnly, token_hash sem consumo no GET, senhas divergentes, atualização, login novo, link reutilizado/expirado, não-admin bloqueado e rate limit sem repetição.",
+    "PASS: fixture local — solicitação sem e-mail real, PKCE/HttpOnly, token_hash sem consumo no GET, senhas divergentes, atualização, login novo, link reutilizado/expirado, não-admin bloqueado e rate limit sem repetição e diagnósticos SMTP/chave/CAPTCHA/desconhecido sanitizados.",
   );
 } finally {
   await browser?.close();

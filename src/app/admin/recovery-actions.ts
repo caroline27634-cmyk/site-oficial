@@ -1,13 +1,14 @@
 "use server";
-import { createHash } from "node:crypto";
-import { cookies } from "next/headers";
+import { createHash, randomUUID } from "node:crypto";
+import { cookies, headers } from "next/headers";
+import { supabaseConfig } from "@/lib/supabase-config";
+import { reportRecoveryFailure } from "@/lib/recovery-diagnostics";
 import { redirect } from "next/navigation";
 import { sessionDb, adminSession } from "@/lib/supabase";
 import {
   recoveryEmailSchema,
   newPasswordSchema,
   recoveryOrigin,
-  rateLimited,
 } from "@/lib/recovery-policy";
 import {
   authorizeRecovery,
@@ -29,11 +30,35 @@ export async function requestRecovery(
   const email = recoveryEmailSchema.safeParse(form.get("email"));
   if (!email.success) return { error: "Informe um e-mail válido." };
   const origin = recoveryOrigin();
-  const db = await sessionDb();
-  if (!db || !origin)
+  const reference = randomUUID();
+  const requestHeaders = await headers();
+  const configStatus = {
+    supabaseUrlPresent: Boolean(process.env.SUPABASE_URL),
+    supabaseKeyPresent: Boolean(process.env.SUPABASE_ANON_KEY),
+    supabaseConfigValid: Boolean(supabaseConfig()),
+    appUrlPresent: Boolean(process.env.APP_URL),
+    appUrlValid: Boolean(origin),
+    requestOriginMatches:
+      origin && requestHeaders.get("origin")
+        ? requestHeaders.get("origin") === origin
+        : null,
+  };
+  let db;
+  try {
+    db = await sessionDb();
+  } catch (error) {
+    reportRecoveryFailure(reference, "client_init", configStatus, error);
     return {
-      error: "A recuperação precisa da configuração do Supabase e de APP_URL.",
+      error: `Não foi possível preparar a recuperação agora. Referência: ${reference}.`,
+      cooldown: 60,
     };
+  }
+  if (!db || !origin) {
+    reportRecoveryFailure(reference, "configuration", configStatus);
+    return {
+      error: `A recuperação precisa da configuração do Supabase e de APP_URL. Referência: ${reference}.`,
+    };
+  }
   const fingerprint = createHash("sha256").update(email.data).digest("hex");
   const now = Date.now();
   const last = attempts.get(fingerprint);
@@ -57,15 +82,19 @@ export async function requestRecovery(
       redirectTo: origin + "/admin/auth/confirm",
     });
     if (error) {
-      if (rateLimited(error))
+      const category = reportRecoveryFailure(
+        reference,
+        "provider",
+        configStatus,
+        error,
+      );
+      if (category === "rate_limit")
         return {
-          error:
-            "O Supabase atingiu o limite de envio de e-mails. Aguarde a liberação da cota; não solicite links repetidamente.",
+          error: `O Supabase atingiu o limite de envio de e-mails. Aguarde a liberação da cota; não solicite links repetidamente. Referência: ${reference}.`,
           cooldown: 60,
         };
       return {
-        error:
-          "Não foi possível solicitar a recuperação agora. Tente novamente mais tarde.",
+        error: `Não foi possível solicitar a recuperação agora. Tente novamente mais tarde. Referência: ${reference}.`,
         cooldown: 60,
       };
     }
@@ -74,9 +103,10 @@ export async function requestRecovery(
         "Se esse e-mail estiver cadastrado, você receberá as instruções. Abra o link mais recente neste mesmo navegador. Solicitar um link não concede acesso administrativo.",
       cooldown: 60,
     };
-  } catch {
+  } catch (error) {
+    reportRecoveryFailure(reference, "exception", configStatus, error);
     return {
-      error: "Serviço de recuperação indisponível. Tente novamente mais tarde.",
+      error: `Serviço de recuperação indisponível. Tente novamente mais tarde. Referência: ${reference}.`,
       cooldown: 60,
     };
   }
